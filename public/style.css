@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #020b46;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vmin;
+  background: #001eda;
+  border-radius: 20% / 16%;
+}
+
+.logs {
+  width: 50vmin;
+  height: 20vmin;
+  margin: 4vmin 0;
+  font-family: "Kanit", sans-serif;
+  font-size: 5vmin;
+  border-radius: 8% / 20%;
+  color: black;
+  background: #a7128c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.inicio-container {
+  height: 60vmin;
+  width: 50vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8vmin 10vmin;
+  background: #001eda;
+  border-radius: 20% / 16%;
+}
+
+.btn-crear {
+  width: 50vmin;
+  height: 12vmin;
+  margin: 3vmin 0;
+  font-family: "Kanit", sans-serif;
+  font-size: 4.5vmin;
+  border-radius: 8% / 24%;
+  color: black;
+  background: #a7128c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.text {
+  width: 46vmin;
+  height: 8vmin;
+  margin: 3vmin 0;
+  font-family: "Kanit", sans-serif;
+  font-size: 4.5vmin;
+  border-radius: 8% / 24%;
+  color: black;
+  padding: 2vmin;
+}
