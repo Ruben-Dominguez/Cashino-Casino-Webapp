@@ -9,14 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-  <script src="app.js"></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
 </head>
 <body>
   <div class="inicio-container">
-    <input type="text" class="text">
-    <input type="password" class="text">
-    <a class="btn-crear" href="#">Crear Cuenta</a>
+    <input id="usernameText" type="text" class="text" value="">
+    <input id="passwordText" type="password" class="text" value="">
+    <a id="crearCuentaBtn" class="btn-crear" href="#">Crear Cuenta</a>
   </div>
 </body>
 </html>
