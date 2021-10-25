@@ -10,28 +10,11 @@ const io = socketio(server);
 
 // Mongodb prueba
 
-// const { MongoClient } = require('mongodb');
-// const uri = "mongodb+srv://admin:admin@cashino.osihp.mongodb.net/cashino?retryWrites=true&w=majority";
-// const client = new MongoClient(uri);
-
-// async function run() {
-//   try {
-//     await client.connect();
-//     const database = client.db('cashino');
-//     const users = database.collection('users');
-//     // Query for a movie that has the title 'Back to the Future'
-
-//     const add = await users.insertOne({user:"wong", password:"wongless"});
-//     console.log(add);
-//   } finally {
-//     // Ensures that the client will close when you finish/error
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://admin:admin@cashino.osihp.mongodb.net/cashino?retryWrites=true&w=majority";
+const client = new MongoClient(uri);
 
 // end mongo prueba
-
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
@@ -47,4 +30,34 @@ io.on('connection', socket => {
     console.log('user disconnected');
   });
 
+  socket.on("cuenta-nueva", cuenta => {
+    console.log(cuenta.username + "\n" + cuenta.password);
+
+    cuentaNueva(cuenta);
+
+    async function cuentaNueva(cuenta) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+    
+        let count = await users.countDocuments({username: cuenta.username});
+        if (count > 0) {
+          socket.emit('error-cuenta-ya-registrada', {message: "Error, cuenta ya registrada"});
+        } else {
+          await users.insertOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
+          socket.emit('cuenta-correcta', {message: "Cuenta registrada corretamente"});
+        }
+      } finally {
+        await client.close();
+      }
+    }
+
+  });
+
 });
+
+
+
+
+
