@@ -1,3 +1,38 @@
+/**
+
+  possible palletes:
+  --bg: #4b3869;
+  --cont: #664e88;
+  --btns: #a9e4d7;
+
+  --bg: #22577a;
+  --cont: #38a3a5;
+  --btns: #80ed99;
+  --btnsHover: #42bc85;
+
+  --bg: #555b6e;
+  --cont: #89b0ae;
+  --btns: #ffd6ba;
+
+  --bg: #293241;
+  --cont: #3d5a80;
+  --btns: #ee6c4d;
+
+  --bg: #125c13;
+  --cont: #3e7c17;
+  --btns: #f4a442;
+
+**/
+
+/** START GENERALS **/
+
+:root {
+  --bg: #22577a;
+  --cont: #38a3a5;
+  --btns: #7cec95;
+  --btnsHover: #35b576;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,70 +43,87 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #020b46;
+  background: var(--bg);
+}
+
+/** END GENERALS **/
+
+/** START CONTAINERS **/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10vmin;
-  background: #001eda;
-  border-radius: 20% / 16%;
+  height: 50vmin;
+  width: 50vmin;
+  padding: 6vmin;
+  background: var(--cont);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+  border-radius: 14%;
 }
 
-.logs {
+/** END CONTAINERS **/
+
+/** START BUTTONS **/
+
+.btn {
   width: 50vmin;
-  height: 20vmin;
-  margin: 4vmin 0;
   font-family: "Kanit", sans-serif;
-  font-size: 5vmin;
-  border-radius: 8% / 20%;
   color: black;
-  background: #a7128c;
+  background: var(--btns);
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   cursor: pointer;
+  transition: 0.5s;
 }
 
-.inicio-container {
-  height: 60vmin;
+.btn:hover {
+  background: var(--btnsHover);
+  transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+}
+
+.btn.inicio {
   width: 50vmin;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 8vmin 10vmin;
-  background: #001eda;
-  border-radius: 20% / 16%;
+  height: 15vmin;
+  margin: 4vmin 0;
+  font-size: 5vmin;
+  border-radius: 6% / 18%;
 }
 
-.btn-crear {
+.btn.crear,
+.btn.iniciar {
   width: 50vmin;
   height: 12vmin;
-  margin: 3vmin 0;
-  font-family: "Kanit", sans-serif;
+  margin: 2.5vmin 0;
   font-size: 4.5vmin;
-  border-radius: 8% / 24%;
-  color: black;
-  background: #a7128c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  cursor: pointer;
+  border-radius: 4.3% / 18%;
 }
 
-.text {
+/** END BUTTONS **/
+
+.textBox {
   width: 46vmin;
   height: 8vmin;
-  margin: 3vmin 0;
+  margin: 2.5vmin 0;
   font-family: "Kanit", sans-serif;
   font-size: 4.5vmin;
-  border-radius: 8% / 24%;
+  border-radius: 3.5% / 20%;
+  background: #cfffcf;
   color: black;
   padding: 2vmin;
+  border: 3px solid #ccc;
+  outline: none;
+  transition: 0.5s;
+}
+
+.textBox:focus {
+  border: 3px solid #555;
 }
