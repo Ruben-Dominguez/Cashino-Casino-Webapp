@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 const PORT = process.env.PORT || 3000;
 const socketio = require('socket.io');
+const fs = require('fs');
 
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,7 @@ const io = socketio(server);
 // Mongodb prueba
 
 const { MongoClient } = require('mongodb');
+const { response } = require('express');
 const uri = "mongodb+srv://admin:admin@cashino.osihp.mongodb.net/cashino?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
@@ -71,9 +73,10 @@ io.on('connection', socket => {
         let count = await users.countDocuments({username: cuenta.username,  password: cuenta.password});
         if(count > 0) {
           let user = await users.find({username: cuenta.username,  password: cuenta.password});
-          await user.forEach(console.dir);
-
+          // await user.forEach(console.dir);
           socket.emit('cuentaCorrecta', {message: "Cuenta correcta"});
+
+
         } else {
           socket.emit('cuentaIncorrecta', {message: "Cuenta no encontrada, intente de nuevo"});
         }

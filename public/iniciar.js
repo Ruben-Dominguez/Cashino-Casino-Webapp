@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let password = document.querySelector('#passwordText');
   let iniciar = document.querySelector('#iniciarBtn');
 
-
-
   // Sockets
   const socket = io();
 
@@ -18,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     username.value = "";
     password.value = "";
     alert(obj.message);
+    window.location.href = "./lobby/lobby.html";
   });
 
   socket.on('cuentaIncorrecta', obj => {

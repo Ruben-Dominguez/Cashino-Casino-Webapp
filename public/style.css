@@ -57,6 +57,13 @@ body {
   align-items: center;
 }
 
+.container-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-container {
   height: 50vmin;
   width: 50vmin;
@@ -99,7 +106,8 @@ body {
 }
 
 .btn.crear,
-.btn.iniciar {
+.btn.iniciar,
+.btn.lobby {
   width: 50vmin;
   height: 12vmin;
   margin: 2.5vmin 0;
@@ -126,4 +134,63 @@ body {
 
 .textBox:focus {
   border: 3px solid #555;
+}
+
+/** START LOBBYS **/
+
+.container-juego {
+  width: 25vw;
+  height: 75vmin;
+  margin: 3vw;
+  background: var(--cont);
+  border-radius: 10%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+}
+
+.image.juego {
+  width: 20vw;
+  height: 20vw;
+  margin: 0.8vw;
+  background: grey;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-family: "Kanit", sans-serif;
+}
+
+.crear-mesa-btn.juego {
+  width: 20vw;
+  height: 5vw;
+  margin: 0.8vw;
+  background: var(--btns);
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 5% / 20%;
+}
+
+.crear-mesa-btn.juego:hover {
+  background: var(--btnsHover);
+  transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+}
+
+.description.juego {
+  width: 20vw;
+  height: 5vw;
+  margin: 0.8vw;
+  background: grey;
+  border-radius: 5% / 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-family: "Kanit", sans-serif;
 }
