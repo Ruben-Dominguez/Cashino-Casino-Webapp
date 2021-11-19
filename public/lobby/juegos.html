@@ -10,23 +10,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
   <script src="/socket.io/socket.io.js"></script>
+  <script src="juegos.js"></script>
 </head>
 <body>
-  <div class="container-h">
-    <div class="container container-juego">
-      <div class="image juego">Image Preview</div>
-      <div class="description juego">2 Jugadores Requeridos</div>
-      <a class="crear-mesa-btn juego">Crear Mesa</a>
-    </div>
-    <div class="container container-juego">
-      <div class="image juego">Image Preview </div>
-      <div class="description juego">1-5 Jugadores Requeridos</div>
-      <a class="crear-mesa-btn juego">Crear Mesa</a>
-    </div>
-    <div class="container container-juego">
-      <div class="image juego">Image Preview</div>
-      <div class="description juego">2 Jugadores Requeridos</div>
-      <a class="crear-mesa-btn juego">Crear Mesa</a>
+  <div class="navbar">
+    <img id="logo" src="https://bit.ly/3FruyCU" alt="logo">
+    <ul>
+      <li id="usernameLabel" class="navbarItem">DemoName</li>
+      <li id="wongbucksLabel" cclass="navbarItem">Wongbucks</li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
+  <div class="content juego">
+    <div class="container-h">
+      <div class="container container-juego">
+        <div class="image juego">Image Preview</div>
+        <div class="description juego">2 Jugadores</div>
+        <a class="crear-mesa-btn juego">Crear Mesa</a>
+      </div>
+      <div class="container container-juego">
+        <div class="image juego">Image Preview </div>
+        <div class="description juego">1-5 Jugadores</div>
+        <a class="crear-mesa-btn juego">Crear Mesa</a>
+      </div>
+      <div class="container container-juego">
+        <div class="image juego">Image Preview</div>
+        <div class="description juego">2 Jugadores</div>
+        <a class="crear-mesa-btn juego">Crear Mesa</a>
+      </div>
     </div>
   </div>
 </body>

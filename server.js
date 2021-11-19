@@ -72,10 +72,10 @@ io.on('connection', socket => {
 
         let count = await users.countDocuments({username: cuenta.username,  password: cuenta.password});
         if(count > 0) {
-          let user = await users.find({username: cuenta.username,  password: cuenta.password});
-          // await user.forEach(console.dir);
-          socket.emit('cuentaCorrecta', {message: "Cuenta correcta"});
+          let user = await users.findOne({username: cuenta.username,  password: cuenta.password});
+          // await console.log(user);
 
+          socket.emit('cuentaCorrecta', {message: "Cuenta correcta", userFound: user});
 
         } else {
           socket.emit('cuentaIncorrecta', {message: "Cuenta no encontrada, intente de nuevo"});
