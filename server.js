@@ -8,6 +8,13 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+//Agregando las funciones del user.js al server
+
+const{userConnected, choices, connectedusers, initializeChoices,makeMove, moves} = require("./prs/users");
+
+//Agregando las funciones del room.js al server
+
+const{joinRoom, createRoom, exitRoom, rooms} = require ("./prs/rooms");
 // Mongodb prueba
 
 const { MongoClient } = require('mongodb');
@@ -54,6 +61,123 @@ io.on('connection', socket => {
     }
 
   });
+
+  //Creando el room con socket prs
+  socket.on("create-room", (roomId) => {
+    if(rooms[roomId]){
+      const error = "This room already exists";
+      socket.emit("display-error", error);
+    }else{
+      userConnected(socket.client.id);
+      createRoom(roomId, socket.client.id);
+      socket.emit("room-created", roomId);
+      socket.emit("player-1-connected");
+      socket.join(roomId);
+
+    }
+  });
+
+  //Uniendonos al room prs
+
+  socket.on("join-room", roomId => {
+      if(!rooms[roomId]){
+        const console = "This room doesnt exists";
+        socket.emit("display-error", error);
+      }else{
+        
+      }
+      userConnected(socket.client.id);
+      createRoom(roomId, socket.client.id);
+      socket.emit("room-joined", roomId);
+      socket.emit("player-2-connected");
+      socket.join(roomId);
+  });
+
+  //Uniendonos a uno random prs
+
+  socket.on("join-random", () => {
+      let roomId = "";
+
+      for(let id in rooms){
+        if(rooms[id][1]=== ""){
+          roomId = id;
+          break;
+        }
+      }
+      if(roomId === ""){
+        const error = "All rooms are full or non available";
+        socket.emit("display-error", error);
+      }else{
+        userConnected(socket.client.id);
+        createRoom(roomId, socket.client.id);
+        socket.emit("room-joined", roomId);
+        socket.emit("player-2-connected");
+        socket.join(roomId);
+      }
+  });
+
+  //Realizando movimientos Prs
+  socket.on("make-move", ({playerId, myChoice, roomId}) =>{
+      makeMove(roomId,playerId,myChoice);
+
+      if(choices[roomId][0] !== "" && choices [roomId][1] !== ""){
+        let playerOneChoice = choices[roomId][0];
+        let playerTwoChoice = choices[roomId][1];
+
+        if(playerOneChoice === playerTwoChoice ){
+          let message = "Hay un empate, escogieron lo mismo" +playerOneChoice 
+          io.to(roomId).emit("draw", message);
+        }else if(moves[playerOneChoice] === playerTwoChoice) {
+          let enemyChoice = "";
+
+          if(playerId === 1){
+            enemyChoice = playerTwoChoice;
+          }else{
+            enemyChoice = playerOneChoice;
+          }
+          choices[rooms] = ["", ""]
+          io.to(roomId).emit("player-1-wins",{myChoice, enemyChoice});
+        } else{
+            let enemyChoice = "";
+
+            if(playerId === 1){
+              enemyChoice = playerTwoChoice;
+            }else{
+              enemyChoice = playerOneChoice;
+            }
+            choices[rooms] = ["", ""]
+            io.to(roomId).emit("player-2-wins",{myChoice, enemyChoice});
+        }
+      }
+
+  })
+  //Desconeccion del room
+  socket.on("disconnect", () =>{
+    if(connectedusers[socket.client.id]){
+      let player;
+      let roomId;
+
+      for(let id in rooms){
+        if(rooms[id[0]] === socket.client.id ||
+             rooms[id][1] === socket.client.id){
+              if(rooms[id[0]] === socket.client.id){
+                  player =1;
+                }else{
+                  player= 2;
+                }
+                roomId = id;
+                break;
+                }
+          }
+
+          exitRoom(roomId, player);
+          if(player === 1){
+            io.to(roomId).emit("player-1-discconected");
+          }else{
+            io.to(roomId).emit("player-2-disconnected");
+          }
+      }
+    })
 
 });
 
