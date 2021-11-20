@@ -11,11 +11,11 @@ const io = socketio(server);
 
 //Agregando las funciones del user.js al server
 
-const{userConnected, choices, connectedusers, initializeChoices,makeMove, moves} = require("./prs/users");
+const{userConnected, choices, connectedusers, initializeChoices,makeMove, moves} = require("./public/juegos/prs/users");
 
 //Agregando las funciones del room.js al server
 
-const{joinRoom, createRoom, exitRoom, rooms} = require ("./prs/rooms");
+const{joinRoom, createRoom, exitRoom, rooms} = require ("./public/juegos/prs/rooms");
 
 // Mongodb prueba
 
