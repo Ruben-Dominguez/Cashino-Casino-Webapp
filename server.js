@@ -3,6 +3,7 @@ const path = require('path');
 const http = require('http');
 const PORT = process.env.PORT || 3000;
 const socketio = require('socket.io');
+const fs = require('fs');
 
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,7 @@ const io = socketio(server);
 // Mongodb prueba
 
 const { MongoClient } = require('mongodb');
+const { response } = require('express');
 const uri = "mongodb+srv://admin:admin@cashino.osihp.mongodb.net/cashino?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 
@@ -30,8 +32,9 @@ io.on('connection', socket => {
     console.log('user disconnected');
   });
 
+  // creacion de cuenta nueva
   socket.on("cuenta-nueva", cuenta => {
-    console.log(cuenta.username + "\n" + cuenta.password);
+    // console.log(cuenta.username + "\n" + cuenta.password);
 
     cuentaNueva(cuenta);
 
@@ -48,6 +51,36 @@ io.on('connection', socket => {
           await users.insertOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
           socket.emit('cuenta-correcta', {message: "Cuenta registrada corretamente"});
         }
+      } finally {
+        await client.close();
+      }
+    }
+
+  });
+
+  // funcion para poder iniciar cuenta
+  socket.on("iniciarSesion", cuenta => {
+    // console.log(cuenta.username + "\n" + cuenta.password);
+
+    iniciarSesion(cuenta);
+
+    async function iniciarSesion(cuenta) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+
+        let count = await users.countDocuments({username: cuenta.username,  password: cuenta.password});
+        if(count > 0) {
+          let user = await users.findOne({username: cuenta.username,  password: cuenta.password});
+          // await console.log(user);
+
+          socket.emit('cuentaCorrecta', {message: "Cuenta correcta", userFound: user});
+
+        } else {
+          socket.emit('cuentaIncorrecta', {message: "Cuenta no encontrada, intente de nuevo"});
+        }
+
       } finally {
         await client.close();
       }
