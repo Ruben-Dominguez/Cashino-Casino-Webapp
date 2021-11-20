@@ -15,6 +15,7 @@ const{userConnected, choices, connectedusers, initializeChoices,makeMove, moves}
 //Agregando las funciones del room.js al server
 
 const{joinRoom, createRoom, exitRoom, rooms} = require ("./prs/rooms");
+
 // Mongodb prueba
 
 const { MongoClient } = require('mongodb');
