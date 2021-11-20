@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let password = document.querySelector('#passwordText');
   let crearCuenta = document.querySelector('#crearCuentaBtn');
 
-
-
   // Sockets
   const socket = io();
 

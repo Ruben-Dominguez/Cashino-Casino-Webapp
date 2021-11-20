@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cashino</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="ruleta.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="ruleta.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <img id="logo" src="https://bit.ly/3FruyCU" alt="logo">
+    <ul>
+      <li id="usernameLabel" class="navbarItem">DemoName</li>
+      <li id="wongbucksLabel" cclass="navbarItem">Wongbucks</li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
+  <div class="content ruleta">
+    <div class="containerMenu ruleta">
+      <div class="tablero ruleta">
+        <div class="c-0 casilla">0</div>
+        <div class="c-1 casilla">1</div>
+        <div class="c-2 casilla">2</div>
+        <div class="c-3 casilla">3</div>
+        <div class="c-4 casilla">4</div>
+        <div class="c-5 casilla">5</div>
+        <div class="c-6 casilla">6</div>
+        <div class="c-7 casilla">7</div>
+        <div class="c-8 casilla">8</div>
+        <div class="c-9 casilla">9</div>
+        <div class="c-10 casilla">10</div>
+        <div class="c-11 casilla">11</div>
+        <div class="c-12 casilla">12</div>
+        <div class="c-13 casilla">13</div>
+        <div class="c-14 casilla">14</div>
+        <div class="c-15 casilla">15</div>
+        <div class="c-16 casilla">16</div>
+        <div class="c-17 casilla">17</div>
+        <div class="c-18 casilla">18</div>
+        <div class="c-19 casilla">19</div>
+        <div class="c-20 casilla">20</div>
+        <div class="c-21 casilla">21</div>
+        <div class="c-22 casilla">22</div>
+        <div class="c-23 casilla">23</div>
+        <div class="c-24 casilla">24</div>
+        <div class="c-25 casilla">25</div>
+        <div class="c-26 casilla">26</div>
+        <div class="c-27 casilla">27</div>
+        <div class="c-28 casilla">28</div>
+        <div class="c-29 casilla">29</div>
+        <div class="c-30 casilla">30</div>
+        <div class="c-31 casilla">31</div>
+        <div class="c-32 casilla">32</div>
+        <div class="c-33 casilla">33</div>
+        <div class="c-34 casilla">34</div>
+        <div class="c-35 casilla">35</div>
+        <div class="c-36 casilla">36</div>
+        <div class="c-1-18 casilla">1-18</div>
+        <div class="c-19-36 casilla">19-36</div>
+        <div class="c-even casilla">EVEN</div>
+        <div class="c-odd casilla">ODD</div>
+        <div class="c-red casilla">RED</div>
+        <div class="c-black casilla">BLACK</div>
+        <div class="c-1-12 casilla">1-12</div>
+        <div class="c-13-24 casilla">13-24</div>
+        <div class="c-25-36 casilla">25-36</div>
+        <div class="c-1row casilla">1row</div>
+        <div class="c-2row casilla">2row</div>
+        <div class="c-3row casilla">3row</div>
+        <div class="c-vacio1 casilla"></div>
+        <div class="c-vacio2 casilla"></div>
+        <div class="c-vacio3 casilla"></div>
+        <div class="c-vacio4 casilla"></div>
+      </div>
+      <input id="apuestaRuleta" type="number" class="textBox ruleta" value="" placeholder="Apuesta">
+      <a id="apostarBtn" class="btn ruleta">Apostar</a>
+    </div>
+    <img id="ruletaCompleta" src="https://bit.ly/3kTqdAO" alt="ruletaPng">
+  </div>
+</body>
+</html>
