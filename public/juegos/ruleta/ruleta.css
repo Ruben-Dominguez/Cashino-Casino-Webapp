@@ -3,6 +3,29 @@
   height: 60vmin;
 }
 
+.palito {
+  position: relative;
+  top: -31vmin;
+  left: 33vmin;
+  z-index: 100;
+  border-left: 3vmin solid transparent;
+  border-right: 3vmin solid transparent;
+  border-top: 6vmin solid red;
+}
+
+.girarRuleta {
+  animation: girar forwards cubic-bezier(0.23, 0.85, 0.54, 0.99) 5s;
+}
+
+@keyframes girar {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(var(--ang, 360deg));
+  }
+}
+
 body {
   background: #044806;
 }
@@ -27,154 +50,130 @@ body {
   background: #0f6c00;
   font-size: 2vmin;
   font-family: "Anton", sans-serif;
+  cursor: pointer;
+}
+
+.verde {
+  background: #56b602;
+}
+
+.rojo {
+  background: #e40606;
+}
+
+.negro {
+  background: #181818;
 }
 
 .c-0 {
-  background: #56b602;
   grid-area: c-0;
 }
 .c-1 {
-  background: #e40606;
   grid-area: c-1;
 }
 .c-2 {
-  background: #181818;
   grid-area: c-2;
 }
 .c-3 {
-  background: #e40606;
   grid-area: c-3;
 }
 .c-4 {
-  background: #181818;
   grid-area: c-4;
 }
 .c-5 {
-  background: #e40606;
   grid-area: c-5;
 }
 .c-6 {
-  background: #181818;
   grid-area: c-6;
 }
 .c-7 {
-  background: #e40606;
   grid-area: c-7;
 }
 .c-8 {
-  background: #181818;
   grid-area: c-8;
 }
 .c-9 {
-  background: #e40606;
   grid-area: c-9;
 }
 .c-10 {
-  background: #181818;
   grid-area: c-10;
 }
 .c-11 {
-  background: #e40606;
   grid-area: c-11;
 }
 .c-12 {
-  background: #181818;
   grid-area: c-12;
 }
 .c-13 {
-  background: #e40606;
   grid-area: c-13;
 }
 .c-14 {
-  background: #181818;
   grid-area: c-14;
 }
 .c-15 {
-  background: #e40606;
   grid-area: c-15;
 }
 .c-16 {
-  background: #181818;
   grid-area: c-16;
 }
 .c-17 {
-  background: #e40606;
   grid-area: c-17;
 }
 .c-18 {
-  background: #181818;
   grid-area: c-18;
 }
 .c-19 {
-  background: #e40606;
   grid-area: c-19;
 }
 .c-20 {
-  background: #181818;
   grid-area: c-20;
 }
 .c-21 {
-  background: #e40606;
   grid-area: c-21;
 }
 .c-22 {
-  background: #181818;
   grid-area: c-22;
 }
 .c-23 {
-  background: #e40606;
   grid-area: c-23;
 }
 .c-24 {
-  background: #181818;
   grid-area: c-24;
 }
 .c-25 {
-  background: #e40606;
   grid-area: c-25;
 }
 .c-26 {
-  background: #181818;
   grid-area: c-26;
 }
 .c-27 {
-  background: #e40606;
   grid-area: c-27;
 }
 .c-28 {
-  background: #181818;
   grid-area: c-28;
 }
 .c-29 {
-  background: #e40606;
   grid-area: c-29;
 }
 .c-30 {
-  background: #181818;
   grid-area: c-30;
 }
 .c-31 {
-  background: #e40606;
   grid-area: c-31;
 }
 .c-32 {
-  background: #181818;
   grid-area: c-32;
 }
 .c-33 {
-  background: #e40606;
   grid-area: c-33;
 }
 .c-34 {
-  background: #181818;
   grid-area: c-34;
 }
 .c-35 {
-  background: #e40606;
   grid-area: c-35;
 }
 .c-36 {
-  background: #181818;
   grid-area: c-36;
 }
 .c-1-18 {
