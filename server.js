@@ -70,7 +70,7 @@ io.on('connection', socket => {
   //Creando el room con socket prs
   socket.on("create-room", (roomId,user) => {
     if(rooms[roomId]){
-      const error = "This room already exists";
+      const error = "Esta sala ya esta en uso";
       socket.emit("display-error", error);
     }else{
       userConnected(socket.client.id);
@@ -83,7 +83,7 @@ io.on('connection', socket => {
 
   socket.on("join-room", (roomId,user) => {
     if(!rooms[roomId]){
-      const error = "This room doen't exist";
+      const error = "Esta sala no exsiste";
       socket.emit("display-error", error);
     }else{
       userConnected(socket.client.id);
@@ -108,7 +108,7 @@ io.on('connection', socket => {
     }
 
     if(roomId === ""){
-      const error = "All rooms are full or none exists";
+      const error = "No hay salas disponibles";
       socket.emit("display-error", error);
     }else{
       userConnected(socket.client.id);
@@ -130,11 +130,11 @@ io.on('connection', socket => {
       let playerTwoChoice = choices[roomId][1];
 
       if(playerOneChoice === playerTwoChoice){
-        let message = "Both of you chose " + playerOneChoice + " . So it's draw";
+        let message = "Empate";
         io.to(roomId).emit("draw", message);
           
       }else if(moves[playerOneChoice] === playerTwoChoice){
-        let enemyChoice = "";
+        enemyChoice = "";
 
         if(playerId === 1){
           enemyChoice = playerTwoChoice;
@@ -144,7 +144,7 @@ io.on('connection', socket => {
 
         io.to(roomId).emit("player-1-wins",);
       }else{
-        let enemyChoice = "";
+        enemyChoice = "";
 
         if(playerId === 1){
           enemyChoice = playerTwoChoice;
@@ -204,9 +204,34 @@ io.on('connection', socket => {
         const users = database.collection('users');
         updating = await users.findOne({username: user},);
         updating.wongbucks = updating.wongbucks + amount;
-        console.log(updating);
+        //console.log(updating);
         var setting = {$set: { wongbucks: updating.wongbucks}}
         await users.updateOne({username: user}, setting);
+      } finally {
+        await client.close();
+      }
+    }
+    
+  });
+  socket.on("ppt-fee", (user) => {
+    //add wongbucks
+    removeMoney(user,150);
+
+    async function removeMoney(user, amount) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+        updating = await users.findOne({username: user},);
+        updating.wongbucks = updating.wongbucks - amount;
+
+        if(updating.wongbucks<=0){
+          
+        } else{
+          console.log(updating);
+          var setting = {$set: { wongbucks: updating.wongbucks}}
+          await users.updateOne({username: user}, setting);
+        }
       } finally {
         await client.close();
       }

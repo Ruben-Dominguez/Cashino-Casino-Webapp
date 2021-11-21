@@ -4,6 +4,283 @@
     box-sizing: border-box;
 }
 
+/**
+
+  possible palletes:
+  --bg: #4b3869;
+  --cont: #664e88;
+  --btns: #a9e4d7;
+
+  --bg: #22577a;
+  --cont: #38a3a5;
+  --btns: #80ed99;
+  --btnsHover: #42bc85;
+
+  --bg: #555b6e;
+  --cont: #89b0ae;
+  --btns: #ffd6ba;
+
+  --bg: #293241;
+  --cont: #3d5a80;
+  --btns: #ee6c4d;
+
+  --bg: #125c13;
+  --cont: #3e7c17;
+  --btns: #f4a442;
+
+**/
+
+/** START GENERALS **/
+
+:root {
+    --navColor: #0c2e46;
+    --bg: #044806;
+    --cont: #38a3a5;
+    --btns: #7cec95;
+    --btnsHover: #35b576;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--bg);
+  }
+  
+  /** END GENERALS **/
+  
+  /** START CONTAINERS **/
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container-h {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-container {
+    height: 50vmin;
+    width: 50vmin;
+    padding: 6vmin;
+    background: var(--cont);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+    border-radius: 14%;
+  }
+  
+  .content.lobby,
+  .content.juego,
+  .content.index,
+  .content.crear,
+  .content.iniciar,
+  .content.ruleta {
+    width: 100%;
+    height: calc(100vh - 12vmin);
+    position: absolute;
+    top: 12vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /** END CONTAINERS **/
+  
+  /** START BUTTONS **/
+  
+  .btn {
+    width: 50vmin;
+    font-family: "Kanit", sans-serif;
+    color: black;
+    background: var(--btns);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  
+  .btn:hover {
+    background: var(--btnsHover);
+    transition: 0.5s;
+    box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+      rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+  }
+  
+  .btn.inicio {
+    width: 50vmin;
+    height: 15vmin;
+    margin: 4vmin 0;
+    font-size: 5vmin;
+    border-radius: 6% / 18%;
+  }
+  
+  .btn.crear,
+  .btn.iniciar,
+  .btn.lobby,
+  .btn.ruleta {
+    width: 50vmin;
+    height: 12vmin;
+    margin: 2.5vmin 0;
+    font-size: 4.5vmin;
+    border-radius: 4.3% / 18%;
+  }
+  
+  /** END BUTTONS **/
+  
+  .textBox {
+    width: 46vmin;
+    height: 8vmin;
+    margin: 2.5vmin 0;
+    font-family: "Kanit", sans-serif;
+    font-size: 4.5vmin;
+    border-radius: 3.5% / 20%;
+    background: #cfffcf;
+    color: black;
+    padding: 2vmin;
+    border: 3px solid #ccc;
+    outline: none;
+    transition: 0.5s;
+  }
+  
+  .textBox:focus {
+    border: 3px solid #555;
+  }
+  
+  /** START LOBBYS **/
+  
+  .container-juego {
+    width: 25vw;
+    height: 75vmin;
+    margin: 0 3vw;
+    background: var(--cont);
+    border-radius: 10%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+  }
+  
+  .image.juego {
+    width: 20vw;
+    height: 20vw;
+    margin: 0.8vw;
+    background: grey;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    font-family: "Kanit", sans-serif;
+  }
+  
+  .crear-mesa-btn.juego {
+    width: 20vw;
+    height: 5vw;
+    margin: 0.8vw;
+    background: var(--btns);
+    font-family: "Kanit", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 5% / 20%;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .crear-mesa-btn.juego:hover {
+    background: var(--btnsHover);
+    transition: 0.5s;
+    box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+      rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+  }
+  
+  .description.juego {
+    width: 20vw;
+    height: 5vw;
+    margin: 0.8vw;
+    background: grey;
+    border-radius: 5% / 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    font-family: "Kanit", sans-serif;
+  }
+  
+  /** NAVBAR START **/
+  
+  #lobbyPage {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  #logo {
+    width: 365px;
+    height: 100px;
+    margin-left: 2.5vmin;
+  }
+  
+  .navbar {
+    width: 100vw;
+    height: 12vmin;
+    background: var(--navColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .navbar ul li {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    margin-right: 5vmin;
+    color: var(--cont);
+    font-size: 1.8rem;
+  }
+  
+  .navbar ul li a {
+    background: #cf0b2b;
+    color: lightgray;
+    border-radius: 15% / 25%;
+    padding: 1.5vmin;
+    text-decoration: none;
+    margin-right: -1.5vmin;
+    transition: 0.3s;
+  }
+  
+  .navbar ul li a:hover {
+    background: #790c1e;
+    transition: 0.3s;
+  }
+  
+  /** NAVBAR END **/
+  
+
+
 body {
     width: 100vw;
     height: 100vh;

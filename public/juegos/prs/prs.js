@@ -124,6 +124,7 @@ socket.on("display-error", error => {
     let p = document.createElement("p");
     p.innerHTML = error;
     errorMessage.appendChild(p);
+    
 })
 
 socket.on("room-created", id => {
@@ -134,6 +135,8 @@ socket.on("room-created", id => {
 
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
+    let user = sessionStorage.getItem('username');
+    socket.emit('ppt-fee', user);
 })
 
 socket.on("room-joined", id => {
@@ -147,6 +150,8 @@ socket.on("room-joined", id => {
 
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
+    let user = sessionStorage.getItem('username');
+    socket.emit('ppt-fee', user);
 })
 
 socket.on("player-1-connected", () => {
@@ -192,8 +197,13 @@ socket.on("player-1-wins", () => {
         }
     }else{
         let message = "lose!";
-        setWinningMessage(message);
+        setWinningMessage(message); 
         enemyScorePoints++;
+        if(enemyScorePoints >= 2){
+            //let user = sessionStorage.getItem('username');
+            setWinningMessage("Loser");
+            //socket.emit('ppt-loser', user);
+        } 
     }
 
     displayScore()
@@ -215,6 +225,11 @@ socket.on("player-2-wins", () => {
         let message = "lose!";
         setWinningMessage(message); 
         enemyScorePoints++;
+        if(enemyScorePoints >= 2){
+            //let user = sessionStorage.getItem('username');
+            setWinningMessage("Loser");
+            //socket.emit('ppt-loser', user);
+        } 
     }
 
     displayScore()
@@ -226,8 +241,8 @@ function setPlayerTag(playerId){
         playerOneTag.innerText = "You (Player 1)";
         playerTwoTag.innerText = "Enemy (Player 2)";
     }else{
-        playerOneTag.innerText = "Enemy (Player 2)";
-        playerTwoTag.innerText = "You (Player 1)";
+        playerOneTag.innerText = "Enemy (Player 1)";
+        playerTwoTag.innerText = "You (Player 2)";
     }
 }
 
@@ -242,7 +257,7 @@ function playerJoinTheGame(playerId){
 function setWaitMessage(display){
     if(display){
         let p = document.createElement("p");
-        p.innerText = "Waiting for another player to join...";
+        p.innerText = "Esperando al otro jugador...";
         waitMessage.appendChild(p)
     }else{
         waitMessage.innerHTML = "";
