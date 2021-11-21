@@ -1,0 +1,114 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Consolas';
+  text-align: center;
+  margin-top: 0.5rem;
+ 
+}
+
+h1{
+  font-size: 3rem;
+}
+
+h3{
+  font-size: 2rem;
+}
+
+a{
+  position: absolute;
+  top:6rem;
+  font-size: 2rem;
+  left: 50%;
+  transform: translate(-50%);
+  color: black;
+}
+
+a:hover{
+  opacity: 0.7;
+}
+
+
+
+body {
+  background-color: #328F16;
+}
+
+.container{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 600px;
+  height: 520px;
+  top: 9rem;
+  background: #3BACDB;
+  border: 2px solid black;
+  padding: .5rem;
+  box-shadow: 5px 10px #0D4200;
+}
+
+.container table tr td{
+  width: 90px;
+  height: 80px;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+.reset{
+  position: absolute;
+  top:33rem;
+  left: 50%;
+  transform: translate(-50%);
+  width: 10rem;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  border: 0.1rem solid black;
+  background: #006E66;
+  cursor: pointer;
+  box-shadow: 6px 5px #0D4200;
+  transition: .2s;
+}
+
+.reset:hover{
+transition: 0.5s;
+box-shadow: 0px 0px #003330;
+}
+
+.exit{
+  position: absolute;
+  top:36rem;
+  left: 50%;
+  transform: translate(-50%);
+  width: 10rem;
+  height: 2rem;
+  text-align: center;
+  padding: 0.3rem;
+  border: 0.1rem solid black;
+  background: #006E66;
+  cursor: pointer;
+  box-shadow: 6px 5px #0D4200;
+  transition: .2s;
+}
+
+.exit:hover{
+transition: 0.5s;
+box-shadow: 0px 0px #003330;
+}
+
+@media screen and (max-width: 600px){
+  .container{
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      width: 90%;
+      height: 520px;
+      top: 9rem;
+      border: 2px solid black;
+      padding: .5rem;
+  }
+}
