@@ -9,10 +9,12 @@
 }
 
 h1{
+  padding-top: 5rem;
   font-size: 3rem;
 }
 
 h3{
+  padding-top: 33rem;
   font-size: 2rem;
 }
 
@@ -59,12 +61,14 @@ body {
 
 
 .reset{
+  font-size: 1.2rem;
+  font-weight: 700;
   position: absolute;
-  top:33rem;
-  left: 50%;
+  top:36rem;
+  left: 30%;
   transform: translate(-50%);
-  width: 10rem;
-  height: 2rem;
+  width: 12rem;
+  height: 2.2rem;
   text-align: center;
   padding: 0.3rem;
   border: 0.1rem solid black;
@@ -80,12 +84,14 @@ box-shadow: 0px 0px #003330;
 }
 
 .exit{
+  font-size: 1.2rem;
+  font-weight: 700;
   position: absolute;
   top:36rem;
-  left: 50%;
+  left: 70%;
   transform: translate(-50%);
-  width: 10rem;
-  height: 2rem;
+  width: 12rem;
+  height: 2.2rem;
   text-align: center;
   padding: 0.3rem;
   border: 0.1rem solid black;
@@ -112,3 +118,61 @@ box-shadow: 0px 0px #003330;
       padding: .5rem;
   }
 }
+
+/** NAVBAR START **/
+
+#lobbyPage {
+  width: 100vw;
+  height: 100vh;
+}
+
+#logo {
+  width: 365px;
+  height: 100px;
+  margin-left: 2.5vmin;
+}
+
+.navbar {
+  width: 100vw;
+  height: 12vmin;
+  background: var(--navColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.navbar ul li {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  margin-right: 5vmin;
+  color: var(--cont);
+  font-size: 1.8rem;
+}
+
+.navbar ul li a {
+  background: #cf0b2b;
+  color: lightgray;
+  border-radius: 15% / 25%;
+  padding: 1.5vmin;
+  text-decoration: none;
+  margin-right: -1.5vmin;
+  transition: 0.3s;
+}
+
+.navbar ul li a:hover {
+  background: #790c1e;
+  transition: 0.3s;
+}
+
+/** NAVBAR END **/

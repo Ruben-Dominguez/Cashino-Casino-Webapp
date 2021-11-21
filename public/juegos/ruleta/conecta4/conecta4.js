@@ -21,7 +21,7 @@ const exitBtn = document.querySelector('.exit');
 
 var currentPlayer = 1;
 let winner;
-playerTurn.textContent = `${player1}'s turn!`
+playerTurn.textContent = `Turno de: ${player1}`
 
 // Log cell coordinates when clicked
 
@@ -52,7 +52,7 @@ function changeColor(e){
                     playerTurn.textContent = 'DRAW!';
                     return alert('DRAW!');
                 }else{
-                    playerTurn.textContent = `${player2}'s turn`
+                    playerTurn.textContent = `Turno de: ${player2}`
                     return currentPlayer = 2;
                 }
             }else{
@@ -65,7 +65,7 @@ function changeColor(e){
                     playerTurn.textContent = 'DRAW!';
                     return alert('DRAW!');
                 }else{
-                    playerTurn.textContent = `${player1}'s turn`;
+                    playerTurn.textContent = `Turno de: ${player1}`;
                     return currentPlayer = 1;
                 }
                 
