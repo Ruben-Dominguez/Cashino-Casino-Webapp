@@ -13,7 +13,7 @@ const exitRoom = (roomId, player) => {
     if(player === 1){
         delete rooms[roomId];
     }
-    else{
+    else if(!(typeof roomId == 'undefined')){
         rooms[roomId][1] = "";
     }
 }

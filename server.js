@@ -36,9 +36,9 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 io.on('connection', socket => {
   console.log('a user connected');
 
-  socket.on('disconnect', () => {
+  /*socket.on('disconnect', () => {
     console.log('user disconnected');
-  });
+  });*/
 
   // creacion de cuenta nueva
   socket.on("cuenta-nueva", cuenta => {
@@ -56,7 +56,7 @@ io.on('connection', socket => {
         if (count > 0) {
           socket.emit('error-cuenta-ya-registrada', {message: "Error, cuenta ya registrada"});
         } else {
-          await users.insertOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
+          await users.updateOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
           socket.emit('cuenta-correcta', {message: "Cuenta registrada corretamente"});
         }
       } finally {
@@ -68,7 +68,7 @@ io.on('connection', socket => {
 
 
   //Creando el room con socket prs
-  socket.on("create-room", (roomId) => {
+  socket.on("create-room", (roomId,user) => {
     if(rooms[roomId]){
       const error = "This room already exists";
       socket.emit("display-error", error);
@@ -78,111 +78,140 @@ io.on('connection', socket => {
       socket.emit("room-created", roomId);
       socket.emit("player-1-connected");
       socket.join(roomId);
+    }
+  })
 
+  socket.on("join-room", (roomId,user) => {
+    if(!rooms[roomId]){
+      const error = "This room doen't exist";
+      socket.emit("display-error", error);
+    }else{
+      userConnected(socket.client.id);
+      joinRoom(roomId, socket.client.id);
+      socket.join(roomId);
+
+      socket.emit("room-joined", roomId);
+      socket.emit("player-2-connected");
+      socket.broadcast.to(roomId).emit("player-2-connected");
+      initializeChoices(roomId);
+    }
+  })
+
+  socket.on("join-random", () => {
+    let roomId = "";
+
+    for(let id in rooms){
+      if(rooms[id][1] === ""){
+        roomId = id;
+        break;
+      }
+    }
+
+    if(roomId === ""){
+      const error = "All rooms are full or none exists";
+      socket.emit("display-error", error);
+    }else{
+      userConnected(socket.client.id);
+      joinRoom(roomId, socket.client.id);
+      socket.join(roomId);
+
+      socket.emit("room-joined", roomId);
+      socket.emit("player-2-connected");
+      socket.broadcast.to(roomId).emit("player-2-connected");
+      initializeChoices(roomId);
     }
   });
 
-  //Uniendonos al room prs
+  socket.on("make-move", ({playerId, myChoice, roomId}) => {
+    makeMove(roomId, playerId, myChoice);
 
-  socket.on("join-room", roomId => {
-      if(!rooms[roomId]){
-        const console = "This room doesnt exists";
-        socket.emit("display-error", error);
-      }else{
-        
-      }
-      userConnected(socket.client.id);
-      createRoom(roomId, socket.client.id);
-      socket.emit("room-joined", roomId);
-      socket.emit("player-2-connected");
-      socket.join(roomId);
-  });
+    if(choices[roomId][0] !== "" && choices[roomId][1] !== ""){
+      let playerOneChoice = choices[roomId][0];
+      let playerTwoChoice = choices[roomId][1];
 
-  //Uniendonos a uno random prs
+      if(playerOneChoice === playerTwoChoice){
+        let message = "Both of you chose " + playerOneChoice + " . So it's draw";
+        io.to(roomId).emit("draw", message);
+          
+      }else if(moves[playerOneChoice] === playerTwoChoice){
+        let enemyChoice = "";
 
-  socket.on("join-random", () => {
-      let roomId = "";
-
-      for(let id in rooms){
-        if(rooms[id][1]=== ""){
-          roomId = id;
-          break;
+        if(playerId === 1){
+          enemyChoice = playerTwoChoice;
+        }else{
+          enemyChoice = playerOneChoice;
         }
-      }
-      if(roomId === ""){
-        const error = "All rooms are full or non available";
-        socket.emit("display-error", error);
+
+        io.to(roomId).emit("player-1-wins",);
       }else{
-        userConnected(socket.client.id);
-        createRoom(roomId, socket.client.id);
-        socket.emit("room-joined", roomId);
-        socket.emit("player-2-connected");
-        socket.join(roomId);
+        let enemyChoice = "";
+
+        if(playerId === 1){
+          enemyChoice = playerTwoChoice;
+        }else{
+          enemyChoice = playerOneChoice;
+        }
+
+        io.to(roomId).emit("player-2-wins",);
       }
+
+      choices[roomId] = ["", ""];
+    }
   });
 
-  //Realizando movimientos Prs
-  socket.on("make-move", ({playerId, myChoice, roomId}) =>{
-      makeMove(roomId,playerId,myChoice);
+  socket.on("disconnect", () => {
+      if(connectedusers[socket.client.id]){
+        let player;
+        let roomId;
 
-      if(choices[roomId][0] !== "" && choices [roomId][1] !== ""){
-        let playerOneChoice = choices[roomId][0];
-        let playerTwoChoice = choices[roomId][1];
-
-        if(playerOneChoice === playerTwoChoice ){
-          let message = "Hay un empate, escogieron lo mismo" +playerOneChoice 
-          io.to(roomId).emit("draw", message);
-        }else if(moves[playerOneChoice] === playerTwoChoice) {
-          let enemyChoice = "";
-
-          if(playerId === 1){
-            enemyChoice = playerTwoChoice;
-          }else{
-            enemyChoice = playerOneChoice;
-          }
-          choices[rooms] = ["", ""]
-          io.to(roomId).emit("player-1-wins",{myChoice, enemyChoice});
-        } else{
-            let enemyChoice = "";
-
-            if(playerId === 1){
-              enemyChoice = playerTwoChoice;
+        for(let id in rooms){
+          if(rooms[id][0] === socket.client.id || 
+            rooms[id][1] === socket.client.id){
+            if(rooms[id][0] === socket.client.id){
+              player = 1;
             }else{
-              enemyChoice = playerOneChoice;
+              player = 2;
             }
-            choices[rooms] = ["", ""]
-            io.to(roomId).emit("player-2-wins",{myChoice, enemyChoice});
+
+            roomId = id;
+            break;
+          }
         }
-      }
 
+        exitRoom(roomId, player);
+
+        if(player === 1){
+          io.to(roomId).emit("player-1-disconnected");
+        }else{
+          io.to(roomId).emit("player-2-disconnected");
+        }
+    }
   })
-  //Desconeccion del room
-  socket.on("disconnect", () =>{
-    if(connectedusers[socket.client.id]){
-      let player;
-      let roomId;
 
-      for(let id in rooms){
-        if(rooms[id[0]] === socket.client.id ||
-             rooms[id][1] === socket.client.id){
-              if(rooms[id[0]] === socket.client.id){
-                  player =1;
-                }else{
-                  player= 2;
-                }
-                roomId = id;
-                break;
-                }
-          }
+  socket.on("ppt-winner", ({user,roomId}) => {
+    console.log("winner", roomId, user);
+    exitRoom(roomId, 1);
+    io.to(roomId).emit("player-1-disconnected");
 
-          exitRoom(roomId, player);
-          if(player === 1){
-            io.to(roomId).emit("player-1-discconected");
-          }else{
-            io.to(roomId).emit("player-2-disconnected");
-          }
+
+    //add wongbucks
+    addMoney(user, 300);
+
+    async function addMoney(user, amount) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+        updating = await users.findOne({username: user},);
+        updating.wongbucks = updating.wongbucks + amount;
+        console.log(updating);
+        var setting = {$set: { wongbucks: updating.wongbucks}}
+        await users.updateOne({username: user}, setting);
+      } finally {
+        await client.close();
       }
-    })
+    }
+  });
 
   // funcion para poder iniciar cuenta
   socket.on("iniciarSesion", cuenta => {
@@ -213,8 +242,6 @@ io.on('connection', socket => {
     }
 
   });
-
-
 });
 
 
