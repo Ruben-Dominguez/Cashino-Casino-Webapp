@@ -1,0 +1,95 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /*font-family: 'Consolas';*/
+  text-align: center;
+}
+
+h1{
+  padding-top: 5rem;
+  font-size: 3rem;
+}
+
+h3{
+  padding-top: 3rem;
+  font-size: 2rem;
+}
+
+body {
+  background-color: #328F16;
+}
+
+.container{
+  margin: auto;
+  width: 600px;
+  height: 520px;
+  top: 9rem;
+  background: #3BACDB;
+  border: 2px solid black;
+  padding: .5rem;
+  box-shadow: 5px 10px #0D4200;
+}
+
+.container table tr td{
+  width: 90px;
+  height: 80px;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+.reset{
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin:auto;
+  width: 12rem;
+  height: 2.2rem;
+  text-align: center;
+  padding: 0.3rem;
+  border: 0.1rem solid black;
+  background: #006E66;
+  cursor: pointer;
+  box-shadow: 6px 5px #0D4200;
+  transition: .2s;
+}
+
+.reset:hover{
+transition: 0.5s;
+box-shadow: 0px 0px #003330;
+}
+
+.exit{
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: auto;
+  width: 12rem;
+  height: 2.2rem;
+  text-align: center;
+  padding: 0.3rem;
+  border: 0.1rem solid black;
+  background: #006E66;
+  cursor: pointer;
+  box-shadow: 6px 5px #0D4200;
+  transition: .2s;
+}
+
+.exit:hover{
+transition: 0.5s;
+box-shadow: 0px 0px #003330;
+}
+
+@media screen and (max-width: 600px){
+  .container{
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      width: 90%;
+      height: 520px;
+      top: 9rem;
+      border: 2px solid black;
+      padding: .5rem;
+  }
+}
