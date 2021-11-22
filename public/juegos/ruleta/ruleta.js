@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
           apostar.classList.remove("disable") ;
         }, 2000);
 
-      }, 4750);
+      }, 5000);
       
     });
 
