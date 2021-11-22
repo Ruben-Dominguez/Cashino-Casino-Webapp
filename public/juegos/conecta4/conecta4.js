@@ -26,7 +26,7 @@ const cancelJoinActionBtn = document.getElementById("cancel-join-action");
 const joinBoxRoom = document.getElementById("join-room-box");
 const joinRoomBtn = document.getElementById("join-room-btn");
 const joinRoomInput = document.getElementById("join-room-input");
-const joinRandomBtn = document.getElementById("join-random");
+
 const errorMessage = document.getElementById("error-message");
 const playerOne = document.getElementById("player-1");
 const playerTwo = document.getElementById("player-2");
@@ -95,7 +95,7 @@ createRoomBtn.addEventListener("click", function(){
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
     //let user = sessionStorage.getItem('username');
-    socket.emit("create-room", id);
+    socket.emit("create-room4", id);
 })
 
 openJoinRoomBox.addEventListener("click", function(){
@@ -113,18 +113,14 @@ joinRoomBtn.addEventListener("click", function(){
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
     //let user = sessionStorage.getItem('username');
-    socket.emit("join-room", id);
+    socket.emit("join-room4", id);
 })
 
-joinRandomBtn.addEventListener("click", function(){
-    errorMessage.innerHTML = "";
-    errorMessage.style.display = "none";
-    socket.emit("join-random");
-})
+
 
 
 // Socket
-socket.on("display-error", error => {
+socket.on("disply-error", error => {
     errorMessage.style.display = "block";
     let p = document.createElement("p");
     p.innerHTML = error;
@@ -132,7 +128,7 @@ socket.on("display-error", error => {
 
 })
 
-socket.on("room-created", id => {
+socket.on("rom-created", id => {
     playerId = 1;
     roomId = id;
 
@@ -146,7 +142,7 @@ socket.on("room-created", id => {
     socket.emit('conecta4-fee', user);
 })
 
-socket.on("room-joined", id => {
+socket.on("rom-joined", id => {
     playerId = 2;
     roomId = id;
 
@@ -162,12 +158,12 @@ socket.on("room-joined", id => {
     socket.emit('conecta4-fee', user);
 })
 
-socket.on("player-1-connected", () => {
+socket.on("playr-1-connected", () => {
     playerJoinTheGame(1);
     playerOneConnected = true;
 })
 
-socket.on("player-2-connected", () => {
+socket.on("playr-2-connected", () => {
     playerJoinTheGame(2)
     playerTwoIsConnected = true
     canChoose = true;
@@ -180,21 +176,21 @@ socket.on("ending", () => {
   }, 2500)
 })
 
-socket.on("player-1-disconnected", () => {
+socket.on("plyer-1-disconnected", () => {
     turn.innerHTML = "El jugador uno se desconecto"
   setTimeout(() => {
     location.reload();
   }, 2500)
 })
 
-socket.on("player-2-disconnected", () => {
+socket.on("plyer-2-disconnected", () => {
   turn.innerHTML = "El jugador dos se desconecto"
   setTimeout(() => {
     location.reload();
   }, 2500)
 })
 
-socket.on("player-1-wins", () => {
+socket.on("plyer-1-wins", () => {
     if(playerId === 2){
       turn.innerHTML = "You Lose";
       turn.style.color = '#8F0A0A';
@@ -210,7 +206,7 @@ socket.on("player-1-wins", () => {
 
 })
 
-socket.on("player-2-wins", () => {
+socket.on("plyer-2-wins", () => {
     if(playerId === 1){
       turn.innerHTML = "You Lose";
       turn.style.color = '#ECFF5E';
@@ -233,12 +229,16 @@ socket.on("actualizar-conecta4", obj => {
     wongbucks.innerHTML = `Wongbucks: $${sessionStorage.getItem('wongbucks')}`;
 });
 
+
 socket.on("red", ({column, j}) =>{
   tableRow[j].children[column].style.backgroundColor = '#8F0A0A';
   if (playerId == 2 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
       socket.emit("win", {playerId, roomId})
   }else if (drawCheck()){
-      socket.emit("draw", {playerId, roomId})
+    turn.innerHTML = "Empate";
+    turn.style.color = 'black';
+    let user = sessionStorage.getItem('username');
+    socket.emit("draw", {user, roomId})
   }
   else{
     turn.innerHTML = "Turno del jugador Amarillo";
@@ -251,7 +251,10 @@ socket.on("yellow", ({column, j}) =>{
   if (playerId == 1 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
       socket.emit("win", {playerId, roomId})
   }else if (drawCheck()){
-      socket.emit("draw", {playerId, roomId})
+    turn.innerHTML = "Empate";
+    turn.style.color = 'black';
+    let user = sessionStorage.getItem('username');
+    socket.emit("draw", {user, roomId})
   }
   else{
     turn.innerHTML = "Turno del jugador Rojo";

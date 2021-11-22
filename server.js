@@ -63,32 +63,32 @@ io.on('connection', socket => {
   });
 
   //Creando el room con socket prs
-  socket.on("create-room", (roomId,user) => {
+  socket.on("create-room4", (roomId,user) => {
     if(rooms[roomId]){
       const error = "Esta sala ya esta en uso";
-      socket.emit("display-error", error);
+      socket.emit("disply-error", error);
     }else{
       userConnected(socket.client.id);
       createRoom(roomId, socket.client.id);
-      socket.emit("room-created", roomId);
-      socket.emit("player-1-connected");
+      socket.emit("rom-created", roomId);
+      socket.emit("playr-1-connected");
       socket.join(roomId);
     }
   })
 
-  socket.on("join-room", (roomId,user) => {
+  socket.on("join-room4", (roomId,user) => {
     if(!rooms[roomId]){
       const error = "Esta sala no existe";
-      socket.emit("display-error", error);
+      socket.emit("disply-error", error);
     }else{
       if(rooms[roomId].players < 2){
         userConnected(socket.client.id);
         joinRoom(roomId, socket.client.id);
         socket.join(roomId);
 
-        socket.emit("room-joined", roomId);
-        socket.emit("player-2-connected");
-        socket.broadcast.to(roomId).emit("player-2-connected");
+        socket.emit("rom-joined", roomId);
+        socket.emit("playr-2-connected");
+        socket.broadcast.to(roomId).emit("playr-2-connected");
       }
       else{
         socket.emit("error");
@@ -113,13 +113,20 @@ io.on('connection', socket => {
   socket.on("win", ({playerId, roomId}) => {
     if(playerId === 1){
       console.log("Gano el 1")
-      io.to(roomId).emit("player-1-wins");
+      io.to(roomId).emit("plyer-1-wins");
     }
     else{
       console.log("Gano el 2")
-      io.to(roomId).emit("player-2-wins");
+      io.to(roomId).emit("plyer-2-wins");
     }
   });
+
+  socket.on("draw", ({playerId, user, roomId})=>{
+    console.log("Empate");
+
+    exitRoom(roomId, 1);
+    io.to(roomId).emit("ending");
+  })
 
   socket.on("disconnect", () => {
       if(connectedusers[socket.client.id]){
@@ -143,9 +150,9 @@ io.on('connection', socket => {
         exitRoom(roomId, player);
 
         if(player === 1){
-          io.to(roomId).emit("player-1-disconnected");
+          io.to(roomId).emit("plyer-1-disconnected");
         }else{
-          io.to(roomId).emit("player-2-disconnected");
+          io.to(roomId).emit("plyer-2-disconnected");
         }
     }
   })
