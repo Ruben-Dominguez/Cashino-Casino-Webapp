@@ -80,7 +80,8 @@ body {
 .content.index,
 .content.crear,
 .content.iniciar,
-.content.ruleta {
+.content.ruleta,
+.content.error {
   width: 100%;
   height: calc(100vh - 12vmin);
   position: absolute;
@@ -272,3 +273,15 @@ body {
 }
 
 /** NAVBAR END **/
+
+.fotos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.susImg {
+  width: 25vmin;
+  height: 25vmin;
+}

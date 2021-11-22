@@ -40,6 +40,16 @@ const playerOneTag = document.getElementById("player-1-tag");
 const playerTwoTag = document.getElementById("player-2-tag");
 const winMessage = document.getElementById("win-message");
 
+ // logout que borre la sesion y te regrese al menu principal
+ logout.addEventListener("click", ()=>{
+    sessionStorage.setItem("username", null);
+    sessionStorage.setItem("wongbucks", null);
+  });
+
+  if(sessionStorage.getItem("username") == "null") {
+    window.location.href = "./error.html";
+  }
+
 //  Game variables
 let canChoose = false;
 let playerOneConnected = false;
@@ -151,7 +161,7 @@ socket.on("room-joined", id => {
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
     let user = sessionStorage.getItem('username');
-    //socket.emit('ppt-fee', user);
+    socket.emit('ppt-fee', user);
 })
 
 socket.on("player-1-connected", () => {
@@ -192,7 +202,6 @@ socket.on("player-1-wins", () => {
             let user = sessionStorage.getItem('username');
             setWinningMessage("Ganador");
             let wongbucksAmount = parseInt(sessionStorage.getItem('wongbucks'));
-            console.log("webos");
             sessionStorage.setItem('wongbucks', wongbucksAmount + 300);
             setTimeout(() => {
                 socket.emit('ppt-winner', {user,roomId});
@@ -218,7 +227,6 @@ socket.on("player-2-wins", () => {
         if(myScorePoints >= 2){
             let user = sessionStorage.getItem('username');
             setWinningMessage("Ganador");
-            console.log("webos");
             setTimeout(() => {
                 socket.emit('ppt-winner', {user,roomId});
             }, 2500)

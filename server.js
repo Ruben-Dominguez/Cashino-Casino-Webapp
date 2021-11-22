@@ -100,7 +100,7 @@ io.on('connection', socket => {
 
   socket.on("join-room", (roomId,user) => {
     if(!rooms[roomId]){
-      const error = "Esta sala no exsiste";
+      const error = "Esta sala no existe";
       socket.emit("display-error", error);
     }else{
       checkMoney(user,roomId);

@@ -254,6 +254,7 @@ body {
   color: greenyellow;
   position: absolute;
   font-family: "Kanit", sans-serif;
+  z-index: 1000;
 }
 
 .perdedor.ruleta {
@@ -263,6 +264,7 @@ body {
   color: red;
   position: absolute;
   font-family: "Kanit", sans-serif;
+  z-index: 1000;
 }
 
 .mostrar {

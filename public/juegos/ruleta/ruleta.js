@@ -38,6 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
   let ruleta = document.querySelector("#ruletaCompleta");
   let ganador = document.querySelector(".ganador");
   let perdedor = document.querySelector(".perdedor");
+  let logout = document.getElementById("logout");
+
+  // logout que borre la sesion y te regrese al menu principal
+  logout.addEventListener("click", ()=>{
+    sessionStorage.setItem("username", null);
+    sessionStorage.setItem("wongbucks", null);
+  });
+
+  if(sessionStorage.getItem("username") == "null") {
+    window.location.href = "./error.html";
+  }
 
   // for para la seleccion de casilla en el tablero
   seleccionables.forEach(seleccionable => {
@@ -177,111 +188,111 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if(seleccion.innerHTML == 0 && numeroGanador == 0) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 1 && numeroGanador == 1) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 2 && numeroGanador == 2) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 3 && numeroGanador == 3) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 4 && numeroGanador == 4) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 5 && numeroGanador == 5) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 6 && numeroGanador == 6) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 7 && numeroGanador == 7) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 8 && numeroGanador == 8) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 9 && numeroGanador == 9) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 10 && numeroGanador == 10) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 11 && numeroGanador == 11) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 12 && numeroGanador == 12) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 13 && numeroGanador == 13) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 14 && numeroGanador == 14) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 15 && numeroGanador == 15) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 16 && numeroGanador == 16) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 17 && numeroGanador == 17) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 18 && numeroGanador == 18) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 19 && numeroGanador == 19) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 20 && numeroGanador == 20) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 21 && numeroGanador == 21) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 22 && numeroGanador == 22) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 23 && numeroGanador == 23) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 24 && numeroGanador == 24) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 25 && numeroGanador == 25) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 26 && numeroGanador == 26) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 27 && numeroGanador == 27) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 28 && numeroGanador == 28) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 29 && numeroGanador == 29) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 30 && numeroGanador == 30) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 31 && numeroGanador == 31) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 32 && numeroGanador == 32) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 33 && numeroGanador == 33) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 34 && numeroGanador == 34) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 35 && numeroGanador == 35) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == 36 && numeroGanador == 36) {
-      resultado = apuesta.value * 36;
+      resultado = apuesta.value * 35;
     } else if(seleccion.innerHTML == "1-12" && first12.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "13-24" && middle12.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "25-36" && last12.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "1row" && row1.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "2row" && row2.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "3row" && row3.includes(numeroGanador)) {
-      resultado = apuesta.value * 3;
+      resultado = apuesta.value * 2;
     } else if(seleccion.innerHTML == "1-18" && first18.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else if(seleccion.innerHTML == "19-36" && last18.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else if(seleccion.innerHTML == "RED" && reds.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else if(seleccion.innerHTML == "BLACK" && blacks.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else if(seleccion.innerHTML == "EVEN" && even.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else if(seleccion.innerHTML == "ODD" && odd.includes(numeroGanador)) {
-      resultado = apuesta.value * 2;
+      resultado = parseInt(apuesta.value);
     } else {
-      resultado = -apuesta.value;
+      resultado = -1 *parseInt(apuesta.value);
     }
 
     // console.log(numeroGanador);
     // console.log(resultado);
 
-    socket.emit("ruletaResultado", {user: user, amount: resultado});
+    socket.emit("ruletaResultado", {user: user, amount: parseInt(resultado)});
 
     socket.on("actualizarRuleta", obj => {
       setTimeout(() => {
@@ -289,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         wongbucks.innerHTML = `Wongbucks: $${sessionStorage.getItem('wongbucks')}`;
 
         if(resultado > 0) {
-          ganador.innerHTML = `Ganaste $${resultado/2}`;
+          ganador.innerHTML = `Ganaste $${parseInt(resultado)}`;
           ganador.disable = false;
           ganador.classList.add("mostrar");
         } else {
