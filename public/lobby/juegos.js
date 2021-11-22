@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.setItem("wongbucks", null);
   });
 
-  if(sessionStorage.getItem("username") == "null") {
+  if(sessionStorage.getItem("username") == "null" || sessionStorage.getItem("username") == null) {
     window.location.href = "./error.html";
   }
 });
