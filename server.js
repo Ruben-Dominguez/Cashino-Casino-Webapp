@@ -78,44 +78,25 @@ io.on('connection', socket => {
 
   socket.on("join-room", (roomId,user) => {
     if(!rooms[roomId]){
-      const error = "Esta sala no exsiste";
+      const error = "Esta sala no existe";
       socket.emit("display-error", error);
     }else{
-      userConnected(socket.client.id);
-      joinRoom(roomId, socket.client.id);
-      socket.join(roomId);
+      if(rooms[roomId].players < 2){
+        userConnected(socket.client.id);
+        joinRoom(roomId, socket.client.id);
+        socket.join(roomId);
 
-      socket.emit("room-joined", roomId);
-      socket.emit("player-2-connected");
-      socket.broadcast.to(roomId).emit("player-2-connected");
-      //initializeChoices(roomId);
+        socket.emit("room-joined", roomId);
+        socket.emit("player-2-connected");
+        socket.broadcast.to(roomId).emit("player-2-connected");
+      }
+      else{
+        socket.emit("error");
+      }
     }
   })
 
-  socket.on("join-random", () => {
-    let roomId = "";
 
-    for(let id in rooms){
-      if(rooms[id][1] === ""){
-        roomId = id;
-        break;
-      }
-    }
-
-    if(roomId === ""){
-      const error = "No hay salas disponibles";
-      socket.emit("display-error", error);
-    }else{
-      userConnected(socket.client.id);
-      joinRoom(roomId, socket.client.id);
-      socket.join(roomId);
-
-      socket.emit("room-joined", roomId);
-      socket.emit("player-2-connected");
-      socket.broadcast.to(roomId).emit("player-2-connected");
-      initializeChoices(roomId);
-    }
-  });
 
   socket.on("move", ({playerId, column, j, roomId}) => {
     console.log(`${playerId}`)
@@ -174,7 +155,7 @@ io.on('connection', socket => {
 
 
      //add wongbucks
-     addMoney(user, 300, roomId);
+     addMoney(user, 400, roomId);
 
      async function addMoney(user, amount, roomId) {
        try {
@@ -190,16 +171,17 @@ io.on('connection', socket => {
          await client.close();
          console.log("winner", roomId, user);
          exitRoom(roomId, 1);
-         io.to(roomId).emit("player-1-disconnected");
+         io.to(roomId).emit("ending");
        }
      }
      console.log("winner", roomId, user);
      exitRoom(roomId, 1);
-     io.to(roomId).emit("player-1-disconnected");
+     io.to(roomId).emit("ending");
    });
+
    socket.on("conecta4-fee", (user) => {
      //add wongbucks
-     removeMoney(user,150);
+     removeMoney(user,200);
      async function removeMoney(user, amount) {
        try {
          await client.connect();

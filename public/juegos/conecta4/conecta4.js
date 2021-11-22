@@ -174,16 +174,24 @@ socket.on("player-2-connected", () => {
     setWaitMessage(false);
 });
 
+socket.on("ending", () => {
+  setTimeout(() => {
+    location.reload();
+  }, 2500)
+})
+
 socket.on("player-1-disconnected", () => {
-    setTimeout(() => {
-      location.reload();
-    }, 2500)
+    turn.innerHTML = "El jugador uno se desconecto"
+  setTimeout(() => {
+    location.reload();
+  }, 2500)
 })
 
 socket.on("player-2-disconnected", () => {
-    canChoose = false;
-    playerTwoLeftTheGame()
-    setWaitMessage(true);
+  turn.innerHTML = "El jugador dos se desconecto"
+  setTimeout(() => {
+    location.reload();
+  }, 2500)
 })
 
 socket.on("player-1-wins", () => {
@@ -249,6 +257,10 @@ socket.on("yellow", ({column, j}) =>{
     turn.innerHTML = "Turno del jugador Rojo";
     turn.style.color = '#8F0A0A';
   }
+})
+
+socket.on("error", () => {
+  window.location.href = "../../lobby/error.html";
 })
 
 // Functions
