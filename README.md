@@ -22,7 +22,7 @@
       <a href="#integrantes">Integrantes</a>
     </li>
     <li><a href="#alcance">Alcance</a></li>
-    <li><a href="#softwareutilizado">Software Utilizado</a></li>
+    <li><a href="#software utilizado">Software Utilizado</a></li>
     <li><a href="#uso">Uso</a></li>
 </details>
 
