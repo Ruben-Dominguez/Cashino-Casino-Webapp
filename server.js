@@ -85,7 +85,7 @@ io.on('connection', socket => {
           await client.close();
           if(updating.wongbucks >= 150){
             userConnected(socket.client.id);
-            createRoom(roomId, socket.client.id);
+            createRoom(roomId, socket.client.id, "ppt");
             socket.emit("room-created", roomId);
             socket.emit("player-1-connected");
             socket.join(roomId);
@@ -99,54 +99,13 @@ io.on('connection', socket => {
   });
 
   socket.on("join-room", (roomId,user) => {
-    if(!rooms[roomId] || rooms[roomId][1]!=""){
+    if(!rooms[roomId] || rooms[roomId][1]!="" || rooms[roomId].type == "c4"){
       const error = "Esta sala no existe o esta llena";
       socket.emit("display-error", error);
     }else{
       checkMoney(user,roomId);
       async function checkMoney(user,roomId) {
         let updating;
-        try {
-          await client.connect();
-          const database = client.db('cashino');
-          const users = database.collection('users');
-          updating = await users.findOne({username: user});
-        } finally {
-          await client.close();
-          if(updating.wongbucks >= 150){
-            userConnected(socket.client.id);
-            joinRoom(roomId, socket.client.id);
-            socket.join(roomId);
-            socket.emit("room-joined", roomId);
-            socket.emit("player-2-connected");
-            socket.broadcast.to(roomId).emit("player-2-connected");
-            initializeChoices(roomId);
-          } else{
-            const error = "le falta $";
-            socket.emit("display-error", error);
-          }
-        }
-      }
-    }
-  });
-
-  socket.on("join-random", (user) => {
-    let roomId = "";
-
-    for(let id in rooms){
-      if(rooms[id][1] === ""){
-        roomId = id;
-        break;
-      }
-    }
-
-    if(roomId === ""){
-      const error = "No hay salas disponibles";
-      socket.emit("display-error", error);
-    }else{
-      checkMoney(user,roomId);
-      async function checkMoney(user,roomId) {
-        let updating
         try {
           await client.connect();
           const database = client.db('cashino');
@@ -210,31 +169,71 @@ io.on('connection', socket => {
 
   //Creando el room con socket prs
   socket.on("create-room4", (roomId,user) => {
+    console.log(user);
     if(rooms[roomId]){
       const error = "Esta sala ya esta en uso";
       socket.emit("disply-error", error);
     }else{
-      userConnected(socket.client.id);
-      createRoom(roomId, socket.client.id);
-      socket.emit("rom-created", roomId);
-      socket.emit("playr-1-connected");
-      socket.join(roomId);
+      checkMoney(user,roomId);
+      async function checkMoney(user,roomId) {
+        let updating;
+        try {
+          await client.connect();
+          const database = client.db('cashino');
+          const users = database.collection('users');
+          updating = await users.findOne({username: user});
+        } finally {
+          await client.close();
+          if(updating.wongbucks >= 200){
+            userConnected(socket.client.id);
+            createRoom(roomId, socket.client.id, "c4");
+            socket.emit("rom-created", roomId);
+            socket.emit("playr-1-connected");
+            socket.join(roomId);
+          } else{
+            const error = "le falta $";
+            socket.emit("display-error", error);
+          }
+        }
+      }
+
+
+
+      
     }
   })
 
   socket.on("join-room4", (roomId,user) => {
-    if(!rooms[roomId]){
+    console.log(user);
+    if(!rooms[roomId] || rooms[roomId].type == "ppt"){
       const error = "Esta sala no existe";
       socket.emit("disply-error", error);
     }else{
       if(rooms[roomId].players < 2){
-        userConnected(socket.client.id);
-        joinRoom(roomId, socket.client.id);
-        socket.join(roomId);
+        checkMoney(user,roomId);
+        async function checkMoney(user,roomId) {
+          let updating;
+          try {
+            await client.connect();
+            const database = client.db('cashino');
+            const users = database.collection('users');
+            updating = await users.findOne({username: user});
+          } finally {
+            await client.close();
+            if(updating.wongbucks >= 200){
+              userConnected(socket.client.id);
+              joinRoom(roomId, socket.client.id);
+              socket.join(roomId);
 
-        socket.emit("rom-joined", roomId);
-        socket.emit("playr-2-connected");
-        socket.broadcast.to(roomId).emit("playr-2-connected");
+              socket.emit("rom-joined", roomId);
+              socket.emit("playr-2-connected");
+              socket.broadcast.to(roomId).emit("playr-2-connected");
+            } else{
+              const error = "le falta $";
+              socket.emit("disply-error", error);
+            }
+          }
+        }
       }
       else{
         socket.emit("error");
@@ -336,14 +335,9 @@ io.on('connection', socket => {
         const users = database.collection('users');
         updating = await users.findOne({username: user},);
         updating.wongbucks = updating.wongbucks - amount;
-
-        if(updating.wongbucks<=0){
-          
-        } else{
-          var setting = {$set: { wongbucks: updating.wongbucks}}
-          await users.updateOne({username: user}, setting);
-          socket.emit("actualizar-ppt", {wongbucks: updating.wongbucks});
-        }
+        var setting = {$set: { wongbucks: updating.wongbucks}}
+        await users.updateOne({username: user}, setting);
+        socket.emit("actualizar-ppt", {wongbucks: updating.wongbucks});
       } finally {
         await client.close();
       }
@@ -387,14 +381,9 @@ io.on('connection', socket => {
         const users = database.collection('users');
         updating = await users.findOne({username: user},);
         updating.wongbucks = updating.wongbucks - amount;
-
-        if(updating.wongbucks<=0){
-
-        } else{
-          var setting = {$set: { wongbucks: updating.wongbucks}}
-          await users.updateOne({username: user}, setting);
-          socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
-        }
+        var setting = {$set: { wongbucks: updating.wongbucks}}
+        await users.updateOne({username: user}, setting);
+        socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
       } finally {
         await client.close();
       }
