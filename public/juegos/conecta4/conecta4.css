@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,32 +6,32 @@
   text-align: center;
 }
 
-h1{
+h1 {
   /*padding-top: 5rem;*/
   font-size: 3rem;
 }
 
-h3{
+h3 {
   /*padding-top: 3rem;*/
   font-size: 2rem;
 }
 
 body {
-  background-color: #328F16;
+  background-color: #044806;
 }
 
-.container{
+.container {
   margin: auto;
   width: 600px;
   height: 520px;
   top: 9rem;
-  background: #3BACDB;
+  background: #3bacdb;
   border: 2px solid black;
-  padding: .5rem;
-  box-shadow: 5px 10px #0D4200;
+  padding: 0.5rem;
+  box-shadow: 5px 10px #0d4200;
 }
 
-.container table tr td{
+.container table tr td {
   width: 90px;
   height: 80px;
   border: 2px solid black;
@@ -40,196 +40,188 @@ body {
   cursor: pointer;
 }
 
-
-@media screen and (max-width: 600px){
-  .container{
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%);
-      width: 90%;
-      height: 520px;
-      top: 9rem;
-      border: 2px solid black;
-      padding: .5rem;
+@media screen and (max-width: 600px) {
+  .container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 90%;
+    height: 520px;
+    top: 9rem;
+    border: 2px solid black;
+    padding: 0.5rem;
   }
 }
 
+.container-h {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
+.btn-container {
+  height: 50vmin;
+  width: 50vmin;
+  padding: 6vmin;
+  background: var(--cont);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+  border-radius: 14%;
+}
 
+/** END CONTAINERS **/
 
-  .container-h {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+/** START BUTTONS **/
 
-  .btn-container {
-    height: 50vmin;
-    width: 50vmin;
-    padding: 6vmin;
-    background: var(--cont);
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
-    border-radius: 14%;
-  }
+.btn {
+  width: 50vmin;
+  font-family: "Kanit", sans-serif;
+  color: black;
+  background: var(--btns);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
 
+.btn:hover {
+  background: var(--btnsHover);
+  transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+}
 
+.btn.inicio {
+  width: 50vmin;
+  height: 15vmin;
+  margin: 4vmin 0;
+  font-size: 5vmin;
+  border-radius: 6% / 18%;
+}
 
-  /** END CONTAINERS **/
+.btn.crear,
+.btn.iniciar,
+.btn.lobby,
+.btn.ruleta {
+  width: 50vmin;
+  height: 12vmin;
+  margin: 2.5vmin 0;
+  font-size: 4.5vmin;
+  border-radius: 4.3% / 18%;
+}
 
-  /** START BUTTONS **/
+/** END BUTTONS **/
 
-  .btn {
-    width: 50vmin;
-    font-family: "Kanit", sans-serif;
-    color: black;
-    background: var(--btns);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.5s;
-  }
+.textBox {
+  width: 46vmin;
+  height: 8vmin;
+  margin: 2.5vmin 0;
+  font-family: "Kanit", sans-serif;
+  font-size: 4.5vmin;
+  border-radius: 3.5% / 20%;
+  background: #cfffcf;
+  color: rgb(168, 13, 13);
+  padding: 2vmin;
+  border: 3px solid #ccc;
+  outline: none;
+  transition: 0.5s;
+}
 
-  .btn:hover {
-    background: var(--btnsHover);
-    transition: 0.5s;
-    box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
-      rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
-  }
+.textBox:focus {
+  border: 3px solid #555;
+}
 
-  .btn.inicio {
-    width: 50vmin;
-    height: 15vmin;
-    margin: 4vmin 0;
-    font-size: 5vmin;
-    border-radius: 6% / 18%;
-  }
+/** START LOBBYS **/
 
-  .btn.crear,
-  .btn.iniciar,
-  .btn.lobby,
-  .btn.ruleta {
-    width: 50vmin;
-    height: 12vmin;
-    margin: 2.5vmin 0;
-    font-size: 4.5vmin;
-    border-radius: 4.3% / 18%;
-  }
+.container-juego {
+  width: 25vw;
+  height: 75vmin;
+  margin: 0 3vw;
+  background: var(--cont);
+  border-radius: 10%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
+}
 
-  /** END BUTTONS **/
+.image.juego {
+  width: 20vw;
+  height: 20vw;
+  margin: 0.8vw;
+  background: grey;
+  border-radius: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-family: "Kanit", sans-serif;
+}
 
-  .textBox {
-    width: 46vmin;
-    height: 8vmin;
-    margin: 2.5vmin 0;
-    font-family: "Kanit", sans-serif;
-    font-size: 4.5vmin;
-    border-radius: 3.5% / 20%;
-    background: #cfffcf;
-    color: rgb(168, 13, 13);
-    padding: 2vmin;
-    border: 3px solid #ccc;
-    outline: none;
-    transition: 0.5s;
-  }
+.crear-mesa-btn.juego {
+  width: 20vw;
+  height: 5vw;
+  margin: 0.8vw;
+  background: var(--btns);
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 5% / 20%;
+  text-decoration: none;
+  color: black;
+}
 
-  .textBox:focus {
-    border: 3px solid #555;
-  }
+.crear-mesa-btn.juego:hover {
+  background: var(--btnsHover);
+  transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
+}
 
-  /** START LOBBYS **/
-
-  .container-juego {
-    width: 25vw;
-    height: 75vmin;
-    margin: 0 3vw;
-    background: var(--cont);
-    border-radius: 10%;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 60px;
-  }
-
-  .image.juego {
-    width: 20vw;
-    height: 20vw;
-    margin: 0.8vw;
-    background: grey;
-    border-radius: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    font-family: "Kanit", sans-serif;
-  }
-
-  .crear-mesa-btn.juego {
-    width: 20vw;
-    height: 5vw;
-    margin: 0.8vw;
-    background: var(--btns);
-    font-family: "Kanit", sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    border-radius: 5% / 20%;
-    text-decoration: none;
-    color: black;
-  }
-
-  .crear-mesa-btn.juego:hover {
-    background: var(--btnsHover);
-    transition: 0.5s;
-    box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
-      rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
-  }
-
-  .description.juego {
-    width: 20vw;
-    height: 5vw;
-    margin: 0.8vw;
-    background: grey;
-    border-radius: 5% / 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    font-family: "Kanit", sans-serif;
-  }
-
+.description.juego {
+  width: 20vw;
+  height: 5vw;
+  margin: 0.8vw;
+  background: grey;
+  border-radius: 5% / 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+  font-family: "Kanit", sans-serif;
+}
 
 body {
-    width: 100vw;
-    height: 100vh;
-    font-size: 16px;
-    font-family: monospace;
+  width: 100vw;
+  height: 100vh;
+  font-size: 16px;
+  font-family: monospace;
 }
 
 .start-screen {
-    width: 70vw;
-    margin: 0 auto;
+  width: 70vw;
+  margin: 0 auto;
 }
 
 .start-screen h1 {
-    text-align: center;
-    font-size: 3rem;
-    font-family: "Kanit", sans-serif;
-    color: #ffffff;
-    padding-top: 30px;
-    margin-bottom: 10vmin;
-    text-shadow: 1px 1px 3px #6077f5;
-    padding: 5vmin;
-    background-color: #339938;
-    border-radius: 3% / 20%;
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Kanit", sans-serif;
+  color: #ffffff;
+  padding-top: 30px;
+  margin-bottom: 10vmin;
+  text-shadow: 1px 1px 3px #6077f5;
+  padding: 5vmin;
+  background-color: #339938;
+  border-radius: 3% / 20%;
 }
 
 .gameplay-choices {
   display: flex;
   justify-content: center;
-
 }
 
 .gameplay-choices button {
@@ -245,7 +237,7 @@ body {
   border-radius: 5% / 20%;
   text-decoration: none;
   color: black;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .gameplay-choices button:hover {
@@ -255,184 +247,181 @@ body {
     rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
 }
 
-
 .create-room-box {
-    display: none;
-    height: 300px;
-
-
+  display: none;
+  height: 300px;
 }
 
 .join-with-id,
 .create-room-box {
-    width: 70%;
-    margin: 0 auto;
-    height: 40px;
-    margin-bottom: 10px;
+  width: 70%;
+  margin: 0 auto;
+  height: 40px;
+  margin-bottom: 10px;
 }
 
 .join-with-id input,
 .create-room-box input {
-    width: 80%;
-    height: 35px;
-    border: 1px solid #333;
-    outline: none;
-    padding: 5px;
-    margin: 0;
-    margin-bottom: 10px;
+  width: 80%;
+  height: 35px;
+  border: 1px solid #333;
+  outline: none;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 .join-with-id button,
 .create-room-box button {
-    width: 20%;
-    margin: 0;
-    height: 35px;
-    background: #189116;
-    color: white;
-    outline: none;
-    border: none;
+  width: 20%;
+  margin: 0;
+  height: 35px;
+  background: #189116;
+  color: white;
+  outline: none;
+  border: none;
 }
 
 .join-with-id .cancel-action,
 .create-room-box .cancel-action {
-    width: 90%;
-    display: block;
-    margin: 0 auto;
-    margin-left: 20px;
-    background: #ccc;
-    color: #333;
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+  margin-left: 20px;
+  background: #ccc;
+  color: #333;
 }
 
 .cancel-action:hover {
-    background: #ddd !important;
-    display: block;
+  background: #ddd !important;
+  display: block;
 }
 
 .gameplay-screen {
-    display: none;
+  display: none;
 }
 
 .wait-message {
-    width: 600px;
-    padding-top: 30px;
-    margin: 0 auto;
-    margin-bottom: 30px;
+  width: 600px;
+  padding-top: 30px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 .wait-message p {
-    text-align: center;
+  text-align: center;
 }
 
 .connected-players {
-    width: 500px;
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 80px;
+  width: 500px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
 }
 
 .connected-players .player {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .connected-players .player .dot {
-    width: 10px;
-    height: 10px;
-    background: red;
-    border-radius: 50%;
-    margin-right: 5px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .connected-players .player .connected {
-    background: green;
+  background: green;
 }
 
 .connected-players .player:first-child {
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 .choices {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all .7s ease-in;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.7s ease-in;
 }
 
 .choice {
-    font-size: 5rem;
-    margin-right: 40px;
+  font-size: 5rem;
+  margin-right: 40px;
 }
 
 .choice:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .choice:hover {
-    cursor: pointer;
-    transform: scale(1.3);
+  cursor: pointer;
+  transform: scale(1.3);
 }
 
 .message-after-choice-selection {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 60px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
 .message-after-choice-selection p {
-    text-align: center;
-    font-size: 1.2rem;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .join-room-box {
-    display: none;
+  display: none;
 }
 
 .join-room-box .join-random {
-    width: 80%;
-    display: block;
-    margin: 0 auto;
-    height: 35px;
-    background: #189116;
-    color: white;
-    outline: none;
-    border: none;
-    margin-left: 10px;
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  height: 35px;
+  background: #189116;
+  color: white;
+  outline: none;
+  border: none;
+  margin-left: 10px;
 }
 
 .error-message {
-    width: 500px;
-    margin: 0 auto;
-    margin-top: 40px;
-    display: none;
-    background: rgb(209, 61, 61);
-    color: white;
-    padding: 20px;
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 40px;
+  display: none;
+  background: rgb(209, 61, 61);
+  color: white;
+  padding: 20px;
 }
 
 .error-message p {
-    text-align: center;
-    font-size: 1.1rem;
+  text-align: center;
+  font-size: 1.1rem;
 }
 
 .my-choice {
-    color: green;
+  color: green;
 }
 
 .enemy-choice {
-    color: red;
+  color: red;
 }
 
 .player1 {
-  color: #ECFF5E;
+  color: #ecff5e;
 }
 
 .player2 {
-  color: #8F0A0A;
+  color: #8f0a0a;
 }
 
 .conecta4-container {
@@ -440,5 +429,5 @@ body {
 }
 
 .player-turn {
-  color: #ECFF5E;
+  color: #ecff5e;
 }

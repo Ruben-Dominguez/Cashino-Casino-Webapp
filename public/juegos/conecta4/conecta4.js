@@ -7,6 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     username.innerHTML = `Username: ${user}`;
     wongbucks.innerHTML = `Wongbucks: $${wongbucksAmount}`;
+
+    if(sessionStorage.getItem("username") == "null" || sessionStorage.getItem("username") == null) {
+        window.location.href = "../../lobby/error.html";
+    }
+
+    let logout = document.getElementById("logout");
+
+  // logout que borre la sesion y te regrese al menu principal
+    logout.addEventListener("click", ()=>{
+        sessionStorage.setItem("username", null);
+        sessionStorage.setItem("wongbucks", null);
+    });
 });
 
 const socket = io();
@@ -81,11 +93,11 @@ Array.prototype.forEach.call(tableData, (cell) => {
 
 openCreateRoomBox.addEventListener("click", function(){
     gameplayChoices.style.display = "none";
-    createRoomBox.style.display = "block";
+    createRoomBox.style.display = "flex";
 })
 
 cancelCreateActionBtn.addEventListener("click", function(){
-    gameplayChoices.style.display = "block";
+    gameplayChoices.style.display = "flex";
     createRoomBox.style.display = "none";
 })
 
@@ -100,11 +112,11 @@ createRoomBtn.addEventListener("click", function(){
 
 openJoinRoomBox.addEventListener("click", function(){
     gameplayChoices.style.display = "none";
-    joinBoxRoom.style.display = "block";
+    joinBoxRoom.style.display = "flex";
 })
 
 cancelJoinActionBtn.addEventListener("click", function(){
-    gameplayChoices.style.display = "block";
+    gameplayChoices.style.display = "flex";
     joinBoxRoom.style.display = "none";
 })
 
