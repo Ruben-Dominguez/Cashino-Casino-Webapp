@@ -260,9 +260,6 @@ io.on('connection', socket => {
         io.to(roomId).emit("player-1-disconnected");
       }
     }
-    console.log("winner", roomId, user);
-    exitRoom(roomId, 1);
-    io.to(roomId).emit("player-1-disconnected");
     
   });
   socket.on("ppt-fee", (user) => {
