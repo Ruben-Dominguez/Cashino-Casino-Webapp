@@ -94,8 +94,8 @@ createRoomBtn.addEventListener("click", function(){
 
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
-    //let user = sessionStorage.getItem('username');
-    socket.emit("create-room4", id);
+    let user = sessionStorage.getItem('username');
+    socket.emit("create-room4", id, user);
 })
 
 openJoinRoomBox.addEventListener("click", function(){
@@ -112,8 +112,8 @@ joinRoomBtn.addEventListener("click", function(){
     let id = joinRoomInput.value;
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
-    //let user = sessionStorage.getItem('username');
-    socket.emit("join-room4", id);
+    let user = sessionStorage.getItem('username');
+    socket.emit("join-room4", id, user);
 })
 
 

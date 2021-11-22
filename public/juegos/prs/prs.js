@@ -26,7 +26,6 @@ const cancelJoinActionBtn = document.getElementById("cancel-join-action");
 const joinBoxRoom = document.getElementById("join-room-box");
 const joinRoomBtn = document.getElementById("join-room-btn");
 const joinRoomInput = document.getElementById("join-room-input");
-const joinRandomBtn = document.getElementById("join-random");
 const errorMessage = document.getElementById("error-message");
 const playerOne = document.getElementById("player-1");
 const playerTwo = document.getElementById("player-2");
@@ -100,12 +99,7 @@ joinRoomBtn.addEventListener("click", function(){
     socket.emit("join-room", id, user);
 })
 
-joinRandomBtn.addEventListener("click", function(){
-    errorMessage.innerHTML = "";
-    errorMessage.style.display = "none";
-    let user = sessionStorage.getItem('username');
-    socket.emit("join-random", user);
-})
+
 
 rock.addEventListener("click", function(){
     if(canChoose && myChoice === "" && playerOneConnected && playerTwoIsConnected){

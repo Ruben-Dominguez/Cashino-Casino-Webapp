@@ -1,9 +1,10 @@
 const rooms = {};
 
-const createRoom = (roomId, player1Id) => {
+const createRoom = (roomId, player1Id,type) => {
     rooms[roomId] = [player1Id, ""];
     rooms[roomId].currentPlayer = 1;
     rooms[roomId].players = 1;
+    rooms[roomId].type = type;
 }
 
 const joinRoom = (roomId, player2Id) => {
