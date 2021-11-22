@@ -73,31 +73,64 @@ io.on('connection', socket => {
       const error = "Esta sala ya esta en uso";
       socket.emit("display-error", error);
     }else{
-      userConnected(socket.client.id);
-      createRoom(roomId, socket.client.id);
-      socket.emit("room-created", roomId);
-      socket.emit("player-1-connected");
-      socket.join(roomId);
+      checkMoney(user,roomId);
+      async function checkMoney(user,roomId) {
+        let updating;
+        try {
+          await client.connect();
+          const database = client.db('cashino');
+          const users = database.collection('users');
+          updating = await users.findOne({username: user});
+        } finally {
+          await client.close();
+          if(updating.wongbucks >= 150){
+            userConnected(socket.client.id);
+            createRoom(roomId, socket.client.id);
+            socket.emit("room-created", roomId);
+            socket.emit("player-1-connected");
+            socket.join(roomId);
+          } else{
+            const error = "le falta $";
+            socket.emit("display-error", error);
+          }
+        }
+      }
     }
-  })
+  });
 
   socket.on("join-room", (roomId,user) => {
     if(!rooms[roomId]){
       const error = "Esta sala no exsiste";
       socket.emit("display-error", error);
     }else{
-      userConnected(socket.client.id);
-      joinRoom(roomId, socket.client.id);
-      socket.join(roomId);
-
-      socket.emit("room-joined", roomId);
-      socket.emit("player-2-connected");
-      socket.broadcast.to(roomId).emit("player-2-connected");
-      initializeChoices(roomId);
+      checkMoney(user,roomId);
+      async function checkMoney(user,roomId) {
+        let updating;
+        try {
+          await client.connect();
+          const database = client.db('cashino');
+          const users = database.collection('users');
+          updating = await users.findOne({username: user});
+        } finally {
+          await client.close();
+          if(updating.wongbucks >= 150){
+            userConnected(socket.client.id);
+            joinRoom(roomId, socket.client.id);
+            socket.join(roomId);
+            socket.emit("room-joined", roomId);
+            socket.emit("player-2-connected");
+            socket.broadcast.to(roomId).emit("player-2-connected");
+            initializeChoices(roomId);
+          } else{
+            const error = "le falta $";
+            socket.emit("display-error", error);
+          }
+        }
+      }
     }
-  })
+  });
 
-  socket.on("join-random", () => {
+  socket.on("join-random", (user) => {
     let roomId = "";
 
     for(let id in rooms){
@@ -111,14 +144,30 @@ io.on('connection', socket => {
       const error = "No hay salas disponibles";
       socket.emit("display-error", error);
     }else{
-      userConnected(socket.client.id);
-      joinRoom(roomId, socket.client.id);
-      socket.join(roomId);
-
-      socket.emit("room-joined", roomId);
-      socket.emit("player-2-connected");
-      socket.broadcast.to(roomId).emit("player-2-connected");
-      initializeChoices(roomId);
+      checkMoney(user,roomId);
+      async function checkMoney(user,roomId) {
+        let updating
+        try {
+          await client.connect();
+          const database = client.db('cashino');
+          const users = database.collection('users');
+          updating = await users.findOne({username: user});
+        } finally {
+          await client.close();
+          if(updating.wongbucks >= 150){
+            userConnected(socket.client.id);
+            joinRoom(roomId, socket.client.id);
+            socket.join(roomId);
+            socket.emit("room-joined", roomId);
+            socket.emit("player-2-connected");
+            socket.broadcast.to(roomId).emit("player-2-connected");
+            initializeChoices(roomId);
+          } else{
+            const error = "le falta $";
+            socket.emit("display-error", error);
+          }
+        }
+      }
     }
   });
 
@@ -189,34 +238,36 @@ io.on('connection', socket => {
   })
 
   socket.on("ppt-winner", ({user,roomId}) => {
-    console.log("winner", roomId, user);
-    exitRoom(roomId, 1);
-    io.to(roomId).emit("player-1-disconnected");
-
+    
 
     //add wongbucks
-    addMoney(user, 300);
+    addMoney(user, 300, roomId);
 
-    async function addMoney(user, amount) {
+    async function addMoney(user, amount, roomId) {
       try {
         await client.connect();
         const database = client.db('cashino');
         const users = database.collection('users');
         updating = await users.findOne({username: user},);
         updating.wongbucks = updating.wongbucks + amount;
-        //console.log(updating);
         var setting = {$set: { wongbucks: updating.wongbucks}}
         await users.updateOne({username: user}, setting);
+        socket.emit("actualizar-ppt", {wongbucks: updating.wongbucks});
       } finally {
         await client.close();
+        console.log("winner", roomId, user);
+        exitRoom(roomId, 1);
+        io.to(roomId).emit("player-1-disconnected");
       }
     }
+    console.log("winner", roomId, user);
+    exitRoom(roomId, 1);
+    io.to(roomId).emit("player-1-disconnected");
     
   });
   socket.on("ppt-fee", (user) => {
     //add wongbucks
     removeMoney(user,150);
-
     async function removeMoney(user, amount) {
       try {
         await client.connect();
@@ -228,9 +279,9 @@ io.on('connection', socket => {
         if(updating.wongbucks<=0){
           
         } else{
-          console.log(updating);
           var setting = {$set: { wongbucks: updating.wongbucks}}
           await users.updateOne({username: user}, setting);
+          socket.emit("actualizar-ppt", {wongbucks: updating.wongbucks});
         }
       } finally {
         await client.close();

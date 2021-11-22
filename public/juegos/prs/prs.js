@@ -63,11 +63,10 @@ cancelCreateActionBtn.addEventListener("click", function(){
 
 createRoomBtn.addEventListener("click", function(){
     let id = roomIdInput.value;
-
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
-    //let user = sessionStorage.getItem('username');
-    socket.emit("create-room", id);
+    let user = sessionStorage.getItem('username');
+    socket.emit("create-room", id, user);
 })
 
 openJoinRoomBox.addEventListener("click", function(){
@@ -84,14 +83,15 @@ joinRoomBtn.addEventListener("click", function(){
     let id = joinRoomInput.value;
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
-    //let user = sessionStorage.getItem('username');
-    socket.emit("join-room", id);
+    let user = sessionStorage.getItem('username');
+    socket.emit("join-room", id, user);
 })
 
 joinRandomBtn.addEventListener("click", function(){
     errorMessage.innerHTML = "";
     errorMessage.style.display = "none";
-    socket.emit("join-random");
+    let user = sessionStorage.getItem('username');
+    socket.emit("join-random", user);
 })
 
 rock.addEventListener("click", function(){
@@ -151,7 +151,7 @@ socket.on("room-joined", id => {
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
     let user = sessionStorage.getItem('username');
-    socket.emit('ppt-fee', user);
+    //socket.emit('ppt-fee', user);
 })
 
 socket.on("player-1-connected", () => {
@@ -191,6 +191,9 @@ socket.on("player-1-wins", () => {
         if(myScorePoints >= 2){
             let user = sessionStorage.getItem('username');
             setWinningMessage("Ganador");
+            let wongbucksAmount = parseInt(sessionStorage.getItem('wongbucks'));
+            console.log("webos");
+            sessionStorage.setItem('wongbucks', wongbucksAmount + 300);
             setTimeout(() => {
                 socket.emit('ppt-winner', {user,roomId});
             }, 2500)
@@ -200,9 +203,7 @@ socket.on("player-1-wins", () => {
         setWinningMessage(message); 
         enemyScorePoints++;
         if(enemyScorePoints >= 2){
-            //let user = sessionStorage.getItem('username');
             setWinningMessage("Loser");
-            //socket.emit('ppt-loser', user);
         } 
     }
 
@@ -217,6 +218,7 @@ socket.on("player-2-wins", () => {
         if(myScorePoints >= 2){
             let user = sessionStorage.getItem('username');
             setWinningMessage("Ganador");
+            console.log("webos");
             setTimeout(() => {
                 socket.emit('ppt-winner', {user,roomId});
             }, 2500)
@@ -234,6 +236,13 @@ socket.on("player-2-wins", () => {
 
     displayScore()
 })
+
+socket.on("actualizar-ppt", obj => {
+    let wongbucksAmount = sessionStorage.setItem('wongbucks', obj.wongbucks);
+    console.log(wongbucksAmount);
+    let wongbucks = document.querySelector('#wongbucksLabel');
+    wongbucks.innerHTML = `Wongbucks: $${sessionStorage.getItem('wongbucks')}`;
+});
 
 // Functions
 function setPlayerTag(playerId){
@@ -326,3 +335,4 @@ function setWinningMessage(message){
         winMessage.innerHTML = "";
     }, 2500)
 }
+
