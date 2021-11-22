@@ -39,6 +39,7 @@ const enemyScore = document.getElementById('enemy-score');
 const playerOneTag = document.getElementById("player-1-tag");
 const playerTwoTag = document.getElementById("player-2-tag");
 const winMessage = document.getElementById("win-message");
+const btnBack = document.querySelector('button');
 
  // logout que borre la sesion y te regrese al menu principal
  logout.addEventListener("click", ()=>{
@@ -61,13 +62,15 @@ let roomId = "";
 let myScorePoints = 0;
 let enemyScorePoints = 0;
 
+
+
 openCreateRoomBox.addEventListener("click", function(){
     gameplayChoices.style.display = "none";
-    createRoomBox.style.display = "block";
+    createRoomBox.style.display = "flex";
 })
 
 cancelCreateActionBtn.addEventListener("click", function(){
-    gameplayChoices.style.display = "block";
+    gameplayChoices.style.display = "flex";
     createRoomBox.style.display = "none";
 })
 
@@ -81,11 +84,11 @@ createRoomBtn.addEventListener("click", function(){
 
 openJoinRoomBox.addEventListener("click", function(){
     gameplayChoices.style.display = "none";
-    joinBoxRoom.style.display = "block";
+    joinBoxRoom.style.display = "flex";
 })
 
 cancelJoinActionBtn.addEventListener("click", function(){
-    gameplayChoices.style.display = "block";
+    gameplayChoices.style.display = "flex";
     joinBoxRoom.style.display = "none";
 })
 
@@ -178,6 +181,7 @@ socket.on("player-2-connected", () => {
 
 socket.on("player-1-disconnected", () => {
     reset()
+    location.reload();
 })
 
 socket.on("player-2-disconnected", () => {
@@ -187,6 +191,7 @@ socket.on("player-2-disconnected", () => {
     enemyScorePoints = 0
     myScorePoints = 0
     displayScore()
+    location.reload();
 })
 
 socket.on("draw", message => {
@@ -343,4 +348,3 @@ function setWinningMessage(message){
         winMessage.innerHTML = "";
     }, 2500)
 }
-
