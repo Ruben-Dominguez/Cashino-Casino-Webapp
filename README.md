@@ -33,6 +33,7 @@ Nuestro proyecto es un videojuego online tipo Casino que cuenta con 3 diferentes
 - Piedra, Papel o Tijera
 - Conecta 4
 - Ruleta 👀
+&nbsp;
 Al loguearse con usuario y contraseña, la aplicación puede conectarse entre jugadores para poder crear mesas y unirse a juegos.
 Se implementa una moneda virtual sin valor la cual te permitirá unirte a los juegos y apostar en ellos.
 
