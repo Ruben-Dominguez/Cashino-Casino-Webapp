@@ -5,7 +5,7 @@
     <img src="https://bit.ly/3FruyCU" alt="Logo" width="240" height="80">
   </a>
 
-  <h3 align="center">Equipo 2</h3>
+  <h2 align="center">Equipo 2</h3>
 
 </div>
 
@@ -24,6 +24,7 @@
     <li><a href="#alcance">Alcance</a></li>
     <li><a href="#software-utilizado">Software Utilizado</a></li>
     <li><a href="#uso">Uso</a></li>
+    <li><a href="#datos-extras">Datos Extras</a></li>
 </details>
 
 ## Descripción
@@ -54,10 +55,10 @@ Se implementa una moneda virtual sin valor la cual te permitirá unirte a los ju
 
 ## Alcance
 
-El casino online hasta el día de hoy cuenta con el servidor que hostea las mesas; teniendo cada juego sus propias mesas. Los usuarios y las contraseñas al final se almacenan en nuestra base de datos junto con la cantidad de moneda virtual que el usuario dispone para apostar en cada juego ( ruleta, conecta 4 y piedra, papel o tijera).  Se pueden crear mesas con un nombre y unirse a dichas mesas mediante el nombre de la misma o bien se puede unir a una random (en los juegos online), mientras que la ruleta es un juego de un solo jugador en el que el jugador puede estar apostando constantemente hasta que se quede sin monedas. Se usan pruebas de caja negra.
+<div style="text-align: justify">El casino online hasta el día de hoy cuenta con el servidor que hostea las mesas; teniendo cada juego sus propias mesas. Los usuarios y las contraseñas al final se almacenan en nuestra base de datos junto con la cantidad de moneda virtual que el usuario dispone para apostar en cada juego ( ruleta, conecta 4 y piedra, papel o tijera).  Se pueden crear mesas con un nombre y unirse a dichas mesas mediante el nombre de la misma o bien se puede unir a una random (en los juegos online), mientras que la ruleta es un juego de un solo jugador en el que el jugador puede estar apostando constantemente hasta que se quede sin monedas. Se usan pruebas de caja negra.</div>
 
 ## Software Utilizado
-
+```
 - [Socket](https://socket.io/)
 - [Express](https://expressjs.com/es/)
 - [HTML](https://developer.mozilla.org/es/docs/Web/HTML)
@@ -65,7 +66,7 @@ El casino online hasta el día de hoy cuenta con el servidor que hostea las mesa
 - [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
 - [MongoDB](https://www.mongodb.com/es)
 - [Heroku](https://www.heroku.com/)
-
+```
 ## Uso
 
 - Entrar al link de la aplicación mostrado en la sección de "Descripción".
@@ -73,4 +74,9 @@ El casino online hasta el día de hoy cuenta con el servidor que hostea las mesa
 - Iniciar sesión clickeando en el botón de "Iniciar Sesión".
 - Seleccionar el juego que deseas.
 - En caso de ser un juego 1 vs 1, crear una mesa o unirse a la mesa correspondiente.
+
+## Datos Extras
+**Universidad Autónoma de Chihuahua**
+**Maestra**: MA. Olanda Prieto Ordaz
+**Materia**: Ingeniería de Software I 
 
