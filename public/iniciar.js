@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // da alerta al mensaje
     alert(obj.message);
-    window.location.href = "./lobby/lobby.html";
+    window.location.href = "./lobby/juegos.html";
   });
 
   socket.on('cuentaIncorrecta', obj => {

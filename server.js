@@ -56,7 +56,7 @@ io.on('connection', socket => {
         if (count > 0) {
           socket.emit('error-cuenta-ya-registrada', {message: "Error, cuenta ya registrada"});
         } else {
-          await users.updateOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
+          await users.insertOne({username: cuenta.username, password: cuenta.password, wongbucks: 1000});
           socket.emit('cuenta-correcta', {message: "Cuenta registrada corretamente"});
         }
       } finally {
