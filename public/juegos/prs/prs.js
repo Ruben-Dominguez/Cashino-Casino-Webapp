@@ -154,7 +154,7 @@ socket.on("room-joined", id => {
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
     let user = sessionStorage.getItem('username');
-    //socket.emit('ppt-fee', user);
+    socket.emit('ppt-fee', user);
 })
 
 socket.on("player-1-connected", () => {
@@ -171,6 +171,7 @@ socket.on("player-2-connected", () => {
 
 socket.on("player-1-disconnected", () => {
     reset()
+    location.reload();
 })
 
 socket.on("player-2-disconnected", () => {
@@ -180,6 +181,7 @@ socket.on("player-2-disconnected", () => {
     enemyScorePoints = 0
     myScorePoints = 0
     displayScore()
+    location.reload();
 })
 
 socket.on("draw", message => {
@@ -338,4 +340,3 @@ function setWinningMessage(message){
         winMessage.innerHTML = "";
     }, 2500)
 }
-
