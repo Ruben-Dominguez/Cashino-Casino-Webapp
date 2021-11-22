@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Ruben-Dominguez/Cashino">
-    <img src="" alt="Logo" width="240" height="80">
+    <img src="https://bit.ly/3FruyCU" alt="Logo" width="240" height="80">
   </a>
 
   <h3 align="center">Equipo 2</h3>
