@@ -130,10 +130,12 @@ io.on('connection', socket => {
   });
 
   socket.on("win", ({playerId, roomId}) => {
-    if(playerId == 1){
+    if(playerId === 1){
+      console.log("Gano el 1")
       io.to(roomId).emit("player-1-wins");
     }
     else{
+      console.log("Gano el 2")
       io.to(roomId).emit("player-2-wins");
     }
   });
@@ -167,55 +169,59 @@ io.on('connection', socket => {
     }
   })
 
+
   socket.on("conecta4-winner", ({user,roomId}) => {
-    console.log("winner", roomId, user);
-    exitRoom(roomId, 1);
-    io.to(roomId).emit("player-1-disconnected");
 
 
-    //add wongbucks
-    addMoney(user, 300);
+     //add wongbucks
+     addMoney(user, 300, roomId);
 
-    async function addMoney(user, amount) {
-      try {
-        await client.connect();
-        const database = client.db('cashino');
-        const users = database.collection('users');
-        updating = await users.findOne({username: user},);
-        updating.wongbucks = updating.wongbucks + amount;
-        //console.log(updating);
-        var setting = {$set: { wongbucks: updating.wongbucks}}
-        await users.updateOne({username: user}, setting);
-      } finally {
-        await client.close();
-      }
-    }
+     async function addMoney(user, amount, roomId) {
+       try {
+         await client.connect();
+         const database = client.db('cashino');
+         const users = database.collection('users');
+         updating = await users.findOne({username: user},);
+         updating.wongbucks = updating.wongbucks + amount;
+         var setting = {$set: { wongbucks: updating.wongbucks}}
+         await users.updateOne({username: user}, setting);
+         socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
+       } finally {
+         await client.close();
+         console.log("winner", roomId, user);
+         exitRoom(roomId, 1);
+         io.to(roomId).emit("player-1-disconnected");
+       }
+     }
+     console.log("winner", roomId, user);
+     exitRoom(roomId, 1);
+     io.to(roomId).emit("player-1-disconnected");
+   });
+   socket.on("conecta4-fee", (user) => {
+     //add wongbucks
+     removeMoney(user,150);
+     async function removeMoney(user, amount) {
+       try {
+         await client.connect();
+         const database = client.db('cashino');
+         const users = database.collection('users');
+         updating = await users.findOne({username: user},);
+         updating.wongbucks = updating.wongbucks - amount;
 
-  });
-  socket.on("conecta4-fee", (user) => {
-    //add wongbucks
-    removeMoney(user,150);
+         if(updating.wongbucks<=0){
 
-    async function removeMoney(user, amount) {
-      try {
-        await client.connect();
-        const database = client.db('cashino');
-        const users = database.collection('users');
-        updating = await users.findOne({username: user},);
-        updating.wongbucks = updating.wongbucks - amount;
+         } else{
+           var setting = {$set: { wongbucks: updating.wongbucks}}
+           await users.updateOne({username: user}, setting);
+           socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
+         }
+       } finally {
+         await client.close();
+       }
+     }
+   });
 
-        if(updating.wongbucks<=0){
 
-        } else{
-          console.log(updating);
-          var setting = {$set: { wongbucks: updating.wongbucks}}
-          await users.updateOne({username: user}, setting);
-        }
-      } finally {
-        await client.close();
-      }
-    }
-  });
 
   // funcion para poder iniciar cuenta
   socket.on("iniciarSesion", cuenta => {

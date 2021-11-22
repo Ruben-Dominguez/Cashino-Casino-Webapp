@@ -20,6 +20,7 @@ const cancelCreateActionBtn = document.getElementById("cancel-create-action");
 const gameplayChoices = document.getElementById("gameplay-choices");
 const createRoomBtn = document.getElementById("create-room-btn");
 const gameplayScreen = document.querySelector(".gameplay-screen");
+const grid = document.querySelector(".conecta4-container")
 const startScreen = document.querySelector(".start-screen");
 const cancelJoinActionBtn = document.getElementById("cancel-join-action");
 const joinBoxRoom = document.getElementById("join-room-box");
@@ -33,6 +34,7 @@ const waitMessage = document.getElementById("wait-message");
 const playerOneTag = document.getElementById("player-1-tag");
 const playerTwoTag = document.getElementById("player-2-tag");
 const winMessage = document.getElementById("win-message");
+const turn = document.getElementById("player-turn");
 
 
 var tableRow = document.getElementsByTagName('tr');
@@ -138,8 +140,10 @@ socket.on("room-created", id => {
 
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
-    //let user = sessionStorage.getItem('username');
-    //socket.emit('ppt-fee', user);
+    grid.style.display = "block";
+
+    let user = sessionStorage.getItem('username');
+    socket.emit('conecta4-fee', user);
 })
 
 socket.on("room-joined", id => {
@@ -153,8 +157,9 @@ socket.on("room-joined", id => {
 
     startScreen.style.display = "none";
     gameplayScreen.style.display = "block";
+    grid.style.display = "block";
     let user = sessionStorage.getItem('username');
-    socket.emit('ppt-fee', user);
+    socket.emit('conecta4-fee', user);
 })
 
 socket.on("player-1-connected", () => {
@@ -170,7 +175,9 @@ socket.on("player-2-connected", () => {
 });
 
 socket.on("player-1-disconnected", () => {
-    reset()
+    setTimeout(() => {
+      location.reload();
+    }, 2500)
 })
 
 socket.on("player-2-disconnected", () => {
@@ -179,69 +186,68 @@ socket.on("player-2-disconnected", () => {
     setWaitMessage(true);
 })
 
-socket.on("draw", message => {
-    setWinningMessage(message);
-})
-
 socket.on("player-1-wins", () => {
-    if(playerId === 1){
-        let message = "win!";
-        setWinningMessage(message);
-
-            let user = sessionStorage.getItem('username');
-            setWinningMessage("Ganador");
-            setTimeout(() => {
-                socket.emit('ppt-winner', {user,roomId});
-            }, 2500)
+    if(playerId === 2){
+      turn.innerHTML = "You Lose";
+      turn.style.color = '#8F0A0A';
     }else{
-        let message = "lose!";
-        setWinningMessage(message);
+      turn.innerHTML = "Ganador";
+      turn.style.color = '#ECFF5E';
+
+      let user = sessionStorage.getItem('username');
+      setTimeout(() => {
+        socket.emit('conecta4-winner', {user,roomId});
+      }, 2500)
     }
 
 })
 
 socket.on("player-2-wins", () => {
-    if(playerId === 2){
-        let message = "win!";
-        setWinningMessage(message);
-
-            let user = sessionStorage.getItem('username');
-            setWinningMessage("Ganador");
-            setTimeout(() => {
-                socket.emit('ppt-winner', {user,roomId});
-            }, 2500)
+    if(playerId === 1){
+      turn.innerHTML = "You Lose";
+      turn.style.color = '#ECFF5E';
     }else{
-        let message = "lose!";
-        setWinningMessage(message);
+      turn.innerHTML = "Ganador";
+      turn.style.color = '#8F0A0A';
+
+      let user = sessionStorage.getItem('username');
+      setTimeout(() => {
+        socket.emit('conecta4-winner', {user,roomId});
+      }, 2500)
     }
 
 })
 
+socket.on("actualizar-conecta4", obj => {
+    let wongbucksAmount = sessionStorage.setItem('wongbucks', obj.wongbucks);
+    console.log(wongbucksAmount);
+    let wongbucks = document.querySelector('#wongbucksLabel');
+    wongbucks.innerHTML = `Wongbucks: $${sessionStorage.getItem('wongbucks')}`;
+});
+
 socket.on("red", ({column, j}) =>{
   tableRow[j].children[column].style.backgroundColor = '#8F0A0A';
-  if (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2()){
+  if (playerId == 2 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
       socket.emit("win", {playerId, roomId})
-      ///playerTurn.textContent = `${player1} WINS!!`;
-      ///playerTurn.style.color = player1Color;
-      //return alert(`${player1} WINS!!`);
   }else if (drawCheck()){
       socket.emit("draw", {playerId, roomId})
-      ///playerTurn.textContent = 'DRAW!';
-      ///return alert('DRAW!');
+  }
+  else{
+    turn.innerHTML = "Turno del jugador Amarillo";
+    turn.style.color = '#ECFF5E';
   }
 })
 
 socket.on("yellow", ({column, j}) =>{
   tableRow[j].children[column].style.backgroundColor = '#ECFF5E';
-  if (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2()){
+  if (playerId == 1 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
       socket.emit("win", {playerId, roomId})
-      ///playerTurn.textContent = `${player1} WINS!!`;
-      ///playerTurn.style.color = player1Color;
-      //return alert(`${player1} WINS!!`);
   }else if (drawCheck()){
       socket.emit("draw", {playerId, roomId})
-      ///playerTurn.textContent = 'DRAW!';
-      ///return alert('DRAW!');
+  }
+  else{
+    turn.innerHTML = "Turno del jugador Rojo";
+    turn.style.color = '#8F0A0A';
   }
 })
 
@@ -278,18 +284,6 @@ function setWaitMessage(display){
 function playerTwoLeftTheGame(){
     playerTwoIsConnected = false;
     playerTwo.classList.remove("connected");
-}
-
-
-function setWinningMessage(message){
-    let p  = document.createElement("p");
-    p.innerText = message;
-
-    winMessage.appendChild(p);
-
-    setTimeout(() => {
-        winMessage.innerHTML = "";
-    }, 2500)
 }
 
 function colorMatchCheck(one, two, three, four){

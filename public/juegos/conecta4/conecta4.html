@@ -56,16 +56,21 @@
 
     <div class="connected-players">
       <div class="player">
-        <span class="dot" id="player-1"></span> <span id="player-1-tag"></span>
+        <span class="dot" id="player-1"></span> <span class="player1" id="player-1-tag"></span>
       </div>
 
       <div class="player">
-        <span class="dot" id="player-2"></span> <span id="player-2-tag"></span>
+        <span class="dot" id="player-2"></span> <span class="player2" id="player-2-tag"></span>
+      </div>
+    </div>
+
+    <h3 class="player-turn" id="player-turn">Turno del jugador Amarillo</h3>
+
+      <div class="message-after-choice-selection" id="win-message">
       </div>
     </div>
 
     <div class="conecta4-container">
-      <h3 class="player-turn"></h3>
       <div class="container">
         <table>
           <tr>
@@ -124,11 +129,6 @@
           </tr>
         </div>
       </div>
-
-      <div class="message-after-choice-selection" id="win-message">
-      </div>
-    </div>
-
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="conecta4.js"></script>
