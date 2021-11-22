@@ -149,7 +149,7 @@
     font-size: 4.5vmin;
     border-radius: 3.5% / 20%;
     background: #cfffcf;
-    color: black;
+    color: rgb(168, 13, 13);
     padding: 2vmin;
     border: 3px solid #ccc;
     outline: none;
@@ -289,42 +289,66 @@ body {
 }
 
 .start-screen {
-    width: 600px;
+    width: 70vw;
     margin: 0 auto;
 }
 
 .start-screen h1 {
     text-align: center;
     font-size: 3rem;
-    color: #111;
+    font-family: "Kanit", sans-serif;
+    color: #ffffff;
     padding-top: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 10vmin;
+    text-shadow: 1px 1px 3px #6077f5;
+    padding: 5vmin;
+    background-color: #339938;
+    border-radius: 3% / 20%;
+}
+
+.gameplay-choices {
+  display: flex;
+  justify-content: center;
+
 }
 
 .gameplay-choices button {
-    padding: 5px 25px;
-    background: #189116;
-    color: white;
-    outline: none;
-    border: none;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 25px;
+  width: 20vw;
+  height: 5vw;
+  margin: 0.8vw;
+  background: #7cec95;
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border-radius: 5% / 20%;
+  text-decoration: none;
+  color: black;
+  transition: .5s;
 }
 
-.start-screen button:hover {
-    background: #189116e1;
-    cursor: pointer;
+.gameplay-choices button:hover {
+  background: #35b576;
+  transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.2) 0px 30px 50px -12px inset,
+    rgba(0, 0, 0, 0.25) 0 15px 30px -15px inset;
 }
+
 
 .create-room-box {
     display: none;
+    height: 300px;
+    
+
 }
 
 .join-with-id,
 .create-room-box {
     width: 70%;
     margin: 0 auto;
+    height: 40px;
+    margin-bottom: 10px;
 }
 
 .join-with-id input,
@@ -335,6 +359,7 @@ body {
     outline: none;
     padding: 5px;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .join-with-id button,
@@ -350,16 +375,17 @@ body {
 
 .join-with-id .cancel-action,
 .create-room-box .cancel-action {
-    width: 80%;
+    width: 90%;
     display: block;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-left: 20px;
     background: #ccc;
     color: #333;
 }
 
 .cancel-action:hover {
     background: #ddd !important;
+    display: block;
 }
 
 .gameplay-screen {
@@ -480,7 +506,7 @@ body {
     color: white;
     outline: none;
     border: none;
-    margin-top: 30px;
+    margin-left: 10px;
 }
 
 .error-message {
