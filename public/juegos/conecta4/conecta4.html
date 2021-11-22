@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Four</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="conecta4.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.2/css/all.css" integrity="sha384-rtJEYb85SiYWgfpCr0jn174XgJTn4rptSOQsMroFBPQSGLdOC5IbubP6lJ35qoM9" crossorigin="anonymous">
+</head>
+<body>
+  <div class="navbar">
+    <img id="logo" src="https://bit.ly/3FruyCU" alt="logo">
+    <ul>
+      <li id="usernameLabel" class="navbarItem">DemoName</li>
+      <li id="wongbucksLabel" cclass="navbarItem">Wongbucks</li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </div>
+
+
+
+  <div class="start-screen">
+    <h1>Conecta 4</h1>
+
+    <div class="gameplay-choices" id="gameplay-choices">
+      <button id="open-create-room-box">Crear Sala</button>
+      <button id="open-join-room-box">Unir a Sala</button>
+    </div>
+
+    <div class="create-room-box" id="create-room-box">
+      <input type="text" id="room-id"><button id="create-room-btn">Create</button>
+
+      <button id="cancel-create-action" class="cancel-action">Cancel</button>
+    </div>
+
+    <div class="join-room-box" id="join-room-box">
+      <div class="join-with-id">
+        <input type="text" id="join-room-input"><button id="join-room-btn">Join</button>
+
+        <button id="cancel-join-action" class="cancel-action">Cancel</button>
+      </div>
+
+    </div>
+
+    <div class="error-message" id="error-message">
+    </div>
+  </div>
+
+  <div class="gameplay-screen">
+    <div class="wait-message" id="wait-message">
+      <p>Waiting for another player to join...</p>
+    </div>
+
+    <div class="connected-players">
+      <div class="player">
+        <span class="dot" id="player-1"></span> <span class="player1" id="player-1-tag"></span>
+      </div>
+
+      <div class="player">
+        <span class="dot" id="player-2"></span> <span class="player2" id="player-2-tag"></span>
+      </div>
+    </div>
+
+    <h3 class="player-turn" id="player-turn">Turno del jugador Amarillo</h3>
+
+      <div class="message-after-choice-selection" id="win-message">
+      </div>
+    </div>
+
+    <div class="conecta4-container">
+      <div class="container">
+        <table>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+          <tr>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+            <td class="slot"></td>
+          </tr>
+        </div>
+      </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="conecta4.js"></script>
+</body>
+</html>

@@ -10,12 +10,13 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 //Agregando las funciones del user.js al server
-
 const{userConnected, choices, connectedusers, initializeChoices,makeMove, moves} = require("./public/juegos/prs/users");
 
 //Agregando las funciones del room.js al server
+// const{joinRoom, createRoom, exitRoom, rooms} = require ("./public/juegos/prs/rooms");
 
-const{joinRoom, createRoom, exitRoom, rooms} = require ("./public/juegos/prs/rooms");
+// const{userConnected, connectedusers, makeMove} = require("./public/juegos/conecta4/users");
+const{joinRoom, createRoom, exitRoom, rooms} = require ("./public/juegos/conecta4/rooms");
 
 // Mongodb prueba
 
@@ -51,7 +52,7 @@ io.on('connection', socket => {
         await client.connect();
         const database = client.db('cashino');
         const users = database.collection('users');
-    
+
         let count = await users.countDocuments({username: cuenta.username});
         if (count > 0) {
           socket.emit('error-cuenta-ya-registrada', {message: "Error, cuenta ya registrada"});
@@ -65,7 +66,6 @@ io.on('connection', socket => {
     }
 
   });
-
 
   //Creando el room con socket prs
   socket.on("create-room", (roomId,user) => {
@@ -208,6 +208,70 @@ io.on('connection', socket => {
     }
   });
 
+  //Creando el room con socket prs
+  socket.on("create-room4", (roomId,user) => {
+    if(rooms[roomId]){
+      const error = "Esta sala ya esta en uso";
+      socket.emit("disply-error", error);
+    }else{
+      userConnected(socket.client.id);
+      createRoom(roomId, socket.client.id);
+      socket.emit("rom-created", roomId);
+      socket.emit("playr-1-connected");
+      socket.join(roomId);
+    }
+  })
+
+  socket.on("join-room4", (roomId,user) => {
+    if(!rooms[roomId]){
+      const error = "Esta sala no existe";
+      socket.emit("disply-error", error);
+    }else{
+      if(rooms[roomId].players < 2){
+        userConnected(socket.client.id);
+        joinRoom(roomId, socket.client.id);
+        socket.join(roomId);
+
+        socket.emit("rom-joined", roomId);
+        socket.emit("playr-2-connected");
+        socket.broadcast.to(roomId).emit("playr-2-connected");
+      }
+      else{
+        socket.emit("error");
+      }
+    }
+  })
+
+  socket.on("move", ({playerId, column, j, roomId}) => {
+    console.log(`${playerId}`)
+    if(rooms[roomId].currentPlayer == playerId && playerId == 1){
+      rooms[roomId].currentPlayer = 2;
+      io.to(roomId).emit("yellow", {column, j});
+    }
+    else if(rooms[roomId].currentPlayer == playerId && playerId == 2){
+      rooms[roomId].currentPlayer = 1;
+      io.to(roomId).emit("red", {column, j});
+    }
+  });
+
+  socket.on("win", ({playerId, roomId}) => {
+    if(playerId === 1){
+      console.log("Gano el 1")
+      io.to(roomId).emit("plyer-1-wins");
+    }
+    else{
+      console.log("Gano el 2")
+      io.to(roomId).emit("plyer-2-wins");
+    }
+  });
+
+  socket.on("draw", ({playerId, user, roomId})=>{
+    console.log("Empate");
+
+    exitRoom(roomId, 1);
+    io.to(roomId).emit("ending");
+  })
+
   socket.on("disconnect", () => {
       if(connectedusers[socket.client.id]){
         let player;
@@ -239,7 +303,6 @@ io.on('connection', socket => {
 
   socket.on("ppt-winner", ({user,roomId}) => {
     
-
     //add wongbucks
     addMoney(user, 300, roomId);
 
@@ -262,6 +325,7 @@ io.on('connection', socket => {
     }
     
   });
+  
   socket.on("ppt-fee", (user) => {
     //add wongbucks
     removeMoney(user,150);
@@ -279,6 +343,57 @@ io.on('connection', socket => {
           var setting = {$set: { wongbucks: updating.wongbucks}}
           await users.updateOne({username: user}, setting);
           socket.emit("actualizar-ppt", {wongbucks: updating.wongbucks});
+        }
+      } finally {
+        await client.close();
+      }
+    }
+  });
+
+  socket.on("conecta4-winner", ({user,roomId}) => {
+
+    //add wongbucks
+    addMoney(user, 400, roomId);
+
+    async function addMoney(user, amount, roomId) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+        updating = await users.findOne({username: user},);
+        updating.wongbucks = updating.wongbucks + amount;
+        var setting = {$set: { wongbucks: updating.wongbucks}}
+        await users.updateOne({username: user}, setting);
+        socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
+      } finally {
+        await client.close();
+        console.log("winner", roomId, user);
+        exitRoom(roomId, 1);
+        io.to(roomId).emit("ending");
+      }
+    }
+    console.log("winner", roomId, user);
+    exitRoom(roomId, 1);
+    io.to(roomId).emit("ending");
+  });
+
+  socket.on("conecta4-fee", (user) => {
+     //add wongbucks
+    removeMoney(user,200);
+    async function removeMoney(user, amount) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+        updating = await users.findOne({username: user},);
+        updating.wongbucks = updating.wongbucks - amount;
+
+        if(updating.wongbucks<=0){
+
+        } else{
+          var setting = {$set: { wongbucks: updating.wongbucks}}
+          await users.updateOne({username: user}, setting);
+          socket.emit("actualizar-conecta4", {wongbucks: updating.wongbucks});
         }
       } finally {
         await client.close();
@@ -341,8 +456,3 @@ io.on('connection', socket => {
   });
 
 });
-
-
-
-
-
