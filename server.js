@@ -88,6 +88,30 @@ io.on('connection', socket => {
 
   });
 
+  socket.on("ruletaResultado", obj => {
+    // console.log(obj.user,obj.amount);
+
+    addMoney(obj.user, obj.amount);
+
+    async function addMoney(user, amount) {
+      try {
+        await client.connect();
+        const database = client.db('cashino');
+        const users = database.collection('users');
+        updating = await users.findOne({username: user},);
+        updating.wongbucks = updating.wongbucks + amount;
+        // console.log(updating);
+        var setting = {$set: { wongbucks: updating.wongbucks}}
+        await users.updateOne({username: user}, setting);
+
+        socket.emit("actualizarRuleta", {wongbucks: updating.wongbucks});
+
+      } finally {
+        await client.close();
+      }
+    }
+  });
+
 });
 
 
