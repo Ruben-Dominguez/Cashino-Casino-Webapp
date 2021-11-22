@@ -42,7 +42,7 @@ Se implementa una moneda virtual sin valor la cual te permitirá unirte a los ju
 
 
 
-### Integrantes
+## Integrantes
 
 * [Ruben Dominguez Chavez](https://github.com/Ruben-Dominguez)    _329806_
 * [Juan Pablo Martinez Cantú](https://github.com/JuanPablomtz0)   _329688_
@@ -56,7 +56,7 @@ Se implementa una moneda virtual sin valor la cual te permitirá unirte a los ju
 
 El casino online hasta el día de hoy cuenta con el servidor que hostea las mesas; teniendo cada juego sus propias mesas. Los usuarios y las contraseñas al final se almacenan en nuestra base de datos junto con la cantidad de moneda virtual que el usuario dispone para apostar en cada juego ( ruleta, conecta 4 y piedra, papel o tijera).  Se pueden crear mesas con un nombre y unirse a dichas mesas mediante el nombre de la misma o bien se puede unir a una random (en los juegos online), mientras que la ruleta es un juego de un solo jugador en el que el jugador puede estar apostando constantemente hasta que se quede sin monedas. Se usan pruebas de caja negra.
 
-### Software Utilizado
+## Software Utilizado
 
 - [Socket](https://socket.io/)
 - [Express](https://expressjs.com/es/)
