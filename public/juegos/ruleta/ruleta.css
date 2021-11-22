@@ -246,3 +246,40 @@ body {
     "c-0 c-1 c-4 c-7 c-10 c-13 c-16 c-19 c-22 c-25 c-28 c-31 c-34 c-3row"
     "c-vacio3 c-1-18 c-1-18 c-19-36 c-19-36 c-red c-red c-black c-black c-odd c-odd c-even c-even c-vacio4";
 }
+
+.ganador.ruleta {
+  width: auto;
+  opacity: 1;
+  font-size: 3rem;
+  color: greenyellow;
+  position: absolute;
+  font-family: "Kanit", sans-serif;
+}
+
+.perdedor.ruleta {
+  width: auto;
+  opacity: 1;
+  font-size: 3rem;
+  color: red;
+  position: absolute;
+  font-family: "Kanit", sans-serif;
+}
+
+.mostrar {
+  animation: desaparecer 2s ease-out;
+}
+
+.disable {
+  background: grey;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+@keyframes desaparecer {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

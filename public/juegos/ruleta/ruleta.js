@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let seleccionables = document.querySelectorAll(".seleccionable");
   let apostar = document.querySelector("#apostarBtn");
   let ruleta = document.querySelector("#ruletaCompleta");
+  let ganador = document.querySelector(".ganador");
+  let perdedor = document.querySelector(".perdedor");
 
   // for para la seleccion de casilla en el tablero
   seleccionables.forEach(seleccionable => {
@@ -68,6 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // evento en click activar la rotacion de la ruleta y seleccionar el payout correspondiente
   apostar.addEventListener("click", () => {
+    // acaba, puesto que la cantidad es incorrecta
+    if(parseInt(sessionStorage.getItem("wongbucks")) < apuesta.value || apuesta.value <= 0) {
+      alert(`Cantidad no valida`);
+      return;
+    }
+
+    // verificador de casillas marcadas
+    let marcado = false;
+    seleccionables.forEach(casilla => {
+      if(casilla.style.background == "yellow") {
+        marcado = true;
+      }
+    });
+
+    // si no hay casilla marcada se sale
+    if(!marcado) {
+      alert("Por favor seleccione una casilla en el tablero");
+      return;
+    }
+
+    if(apostar.innerHTML == "Apostar" || apostar.innerHTML == "Apostar de nuevo")
+      apostar.classList.add("disable");
+
     let anguloRandom = Math.random() * 360; // 0- 359
     ruleta.classList.toggle("girarRuleta");
     if(ruleta.classList.contains("girarRuleta")) {
@@ -262,12 +287,36 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         wongbucksAmount = sessionStorage.setItem('wongbucks', obj.wongbucks);
         wongbucks.innerHTML = `Wongbucks: $${sessionStorage.getItem('wongbucks')}`;
-      }, 5000);
+
+        if(resultado > 0) {
+          ganador.innerHTML = `Ganaste $${resultado/2}`;
+          ganador.disable = false;
+          ganador.classList.add("mostrar");
+        } else {
+          perdedor.innerHTML = `Perdiste $${-1*resultado}`;
+          perdedor.disable = false;
+          perdedor.classList.add("mostrar");
+        }
+
+        setTimeout(() => {
+          if(resultado > 0) {
+            ganador.innerHTML = "";
+            ganador.classList.remove("mostrar");
+            ganador.disable = true;
+          } else {
+            perdedor.innerHTML = "";
+            perdedor.classList.remove("mostrar");
+            perdedor.disable = true;
+          }
+          apostar.classList.remove("disable") ;
+        }, 2000);
+
+      }, 4500);
       
     });
 
     } else {
-      apostar.innerHTML = "Apostar";
+      apostar.innerHTML = "Apostar de nuevo";
     }
     
   });

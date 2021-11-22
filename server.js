@@ -100,7 +100,7 @@ io.on('connection', socket => {
         const users = database.collection('users');
         updating = await users.findOne({username: user},);
         updating.wongbucks = updating.wongbucks + amount;
-        console.log(updating);
+        // console.log(updating);
         var setting = {$set: { wongbucks: updating.wongbucks}}
         await users.updateOne({username: user}, setting);
 
