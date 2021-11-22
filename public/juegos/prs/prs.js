@@ -48,7 +48,7 @@ const btnBack = document.querySelector('button');
   });
 
   if(sessionStorage.getItem("username") == "null" || sessionStorage.getItem("username") == null) {
-    window.location.href = "../lobby/error.html";
+    window.location.href = "../../lobby/error.html";
   }
 
 //  Game variables

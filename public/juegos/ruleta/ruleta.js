@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if(sessionStorage.getItem("username") == "null" || sessionStorage.getItem("username") == null) {
-    window.location.href = "../lobby/error.html";
+    window.location.href = "../../lobby/error.html";
   }
 
   // for para la seleccion de casilla en el tablero
