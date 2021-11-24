@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     username.innerHTML = `Username: ${user}`;
     wongbucks.innerHTML = `Wongbucks: $${wongbucksAmount}`;
+
+    let atras = document.getElementById('atrasC');
+        atras.addEventListener('click', () => {
+        window.location.href = "../../lobby/juegos.html";
+    });
 });
   
 const socket = io();

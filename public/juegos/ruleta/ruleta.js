@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // END NAVBAR
 
+  let atras = document.getElementById('atras');
+  atras.addEventListener('click', () => {
+    window.location.href = "../../lobby/juegos.html";
+  })
 
   const socket = io();
 

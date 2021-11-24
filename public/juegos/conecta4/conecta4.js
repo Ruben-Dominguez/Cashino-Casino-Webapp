@@ -203,6 +203,7 @@ socket.on("plyer-2-disconnected", () => {
 })
 
 socket.on("plyer-1-wins", () => {
+    grid.style.display = "none";
     if(playerId === 2){
       turn.innerHTML = "You Lose";
       turn.style.color = '#8F0A0A';
@@ -219,6 +220,7 @@ socket.on("plyer-1-wins", () => {
 })
 
 socket.on("plyer-2-wins", () => {
+    grid.style.display = "none";
     if(playerId === 1){
       turn.innerHTML = "You Lose";
       turn.style.color = '#ECFF5E';
@@ -245,8 +247,9 @@ socket.on("actualizar-conecta4", obj => {
 socket.on("red", ({column, j}) =>{
   tableRow[j].children[column].style.backgroundColor = '#8F0A0A';
   if (playerId == 2 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
-      socket.emit("win", {playerId, roomId})
+    socket.emit("win", {playerId, roomId})
   }else if (drawCheck()){
+    grid.style.display = "none";
     turn.innerHTML = "Empate";
     turn.style.color = 'black';
     let user = sessionStorage.getItem('username');
@@ -261,8 +264,9 @@ socket.on("red", ({column, j}) =>{
 socket.on("yellow", ({column, j}) =>{
   tableRow[j].children[column].style.backgroundColor = '#ECFF5E';
   if (playerId == 1 && (horizontalCheck() || verticalCheck() || diagonalCheck() || diagonalCheck2())){
-      socket.emit("win", {playerId, roomId})
+    socket.emit("win", {playerId, roomId})
   }else if (drawCheck()){
+    grid.style.display = "none";
     turn.innerHTML = "Empate";
     turn.style.color = 'black';
     let user = sessionStorage.getItem('username');
