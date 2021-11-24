@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let username = document.querySelector('#usernameText');
   let password = document.querySelector('#passwordText');
   let iniciar = document.querySelector('#iniciarBtn');
+  let atras = document.getElementById('atras');
 
   // console.log(sessionStorage.getItem('username'), sessionStorage.getItem('password'));
 
@@ -12,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   iniciar.addEventListener('click', () => {
     socket.emit('iniciarSesion', {username: username.value, password: password.value});
   });
+
+  atras.addEventListener('click', () => {
+    window.location.href = "/";
+  })
 
   socket.on('cuentaCorrecta', obj => {
     if(sessionStorage.getItem('username') == username.value && sessionStorage.getItem('password') == password.value) {

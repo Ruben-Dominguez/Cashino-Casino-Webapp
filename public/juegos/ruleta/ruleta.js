@@ -60,7 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
       seleccionables.forEach(marcado => {
 
         // buscar por color la casilla amarilla
-        if(marcado.style.background == "yellow"){
+        if(marcado.classList.contains('marcado')){
+          marcado.classList.remove('marcado');
+          marcado.style.color = "white";
           if(marcado.classList.contains("verde")){
             marcado.style.background = "#56b602";
           } else if(marcado.classList.contains("rojo")) {
@@ -74,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       // seleccion de casilla
       seleccionable.style.background = "yellow";
+      seleccionable.style.color = "black";
+      seleccionable.classList.add('marcado');
       seleccion = seleccionable;
       // console.log(seleccion);
     });
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // verificador de casillas marcadas
     let marcado = false;
     seleccionables.forEach(casilla => {
-      if(casilla.style.background == "yellow") {
+      if(casilla.classList.contains('marcado')) {
         marcado = true;
       }
     });

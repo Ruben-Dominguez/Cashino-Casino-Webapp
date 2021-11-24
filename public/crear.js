@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let username = document.querySelector('#usernameText');
   let password = document.querySelector('#passwordText');
   let crearCuenta = document.querySelector('#crearCuentaBtn');
+  let atras = document.getElementById('atras');
+
+  atras.addEventListener('click', () => {
+    window.location.href = "/";
+  })
 
   // Sockets
   const socket = io();
@@ -29,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('cuenta-correcta', obj => {
     username.value = "";
     password.value = "";
-    alert(obj.message);
+    alert(`${obj.message}\nRedireccionando a Inicio de Sesion`);
+    window.location.href = "./iniciar.html";
   });
 
   socket.on('error-cuenta-ya-registrada', obj => {

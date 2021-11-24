@@ -91,6 +91,13 @@ body {
   justify-content: center;
 }
 
+.columnizador {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /** END CONTAINERS **/
 
 /** START BUTTONS **/
@@ -284,4 +291,39 @@ body {
 .susImg {
   width: 25vmin;
   height: 25vmin;
+}
+
+.tituloInicio {
+  margin: 0;
+  width: 35vmin;
+  padding: 1.5vmin 3vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #656565;
+  background: #91e7dc;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+  font-size: 4vmin;
+  border-top-left-radius: 8% 30%;
+  border-top-right-radius: 8% 30%;
+}
+
+#atras {
+  width: 6vmin;
+  height: 6vmin;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 2vmin;
+  padding: 1vmin 4vmin;
+  border-radius: 10% / 20%;
+  background: #cf0b2b;
+  border: solid #656565 0.4vmin;
+  transition: 0.3s;
+}
+
+#atras:hover {
+  transition: 0.3s;
+  background: #790c1e;
 }
