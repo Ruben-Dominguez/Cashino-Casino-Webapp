@@ -39,7 +39,7 @@ Al loguearse con usuario y contraseña, la aplicación puede conectarse entre ju
 Se implementa una moneda virtual sin valor la cual te permitirá unirte a los juegos y apostar en ellos.
 
 * [Repositorio Proyecto](https://github.com/Ruben-Dominguez/Cashino)
-* [Aplicación](https://cashino-wong.herokuapp.com/index.html)
+* [Aplicación](https://cashino.onrender.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
